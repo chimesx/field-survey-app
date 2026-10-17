@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>專業現勘調查報告系統 v4.3.2 iPhone PWA Safe Area Fix</title>
+<title>專業現勘調查報告系統 v4.3.3 iOS Header Polish</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="現勘調查">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <script>
@@ -83,13 +83,33 @@ html.pwa-standalone .overlay{padding-top:calc(12px + env(safe-area-inset-top,0px
 /* v4.3.2 Field Productivity / Mobile UX */
 .productivity-bar{display:flex;gap:6px;flex-wrap:wrap}.btn-active{outline:3px solid #fde68a;box-shadow:0 0 0 2px #92400e inset}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.quick-type{border:1px solid var(--line);background:#fff;border-radius:10px;padding:14px 8px;font-weight:800;cursor:pointer}.quick-type.active{background:#dbeafe;border-color:#3b82f6;color:#0758a8}.quick-status{display:flex;gap:8px;margin:10px 0}.quick-status button{flex:1}.checklist-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #edf2f7}.checklist-item input[type=checkbox]{width:22px;height:22px}.qc-list{display:flex;flex-direction:column;gap:8px}.qc-item{padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:#f8fafc}.qc-item.warn{border-color:#f5c56f;background:#fff8e8}.qc-item.error{border-color:#f0a4a4;background:#fff0f0}.qc-item.ok{border-color:#9fd3b1;background:#effaf2}.offline-box{padding:10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}.offline-progress{height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin-top:8px}.offline-progress>div{height:100%;width:0;background:#0b74de;transition:width .2s}.draw-summary{font-size:12px;color:#475569;margin-top:6px}.camera-preset{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.camera-preset button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 9px;font-size:12px}.camera-preset button.active{background:#e8f2ff;border-color:#6eb0ee;color:#0758a8;font-weight:800}.leaflet-draw-toolbar a{font-size:0}.leaflet-draw-toolbar a:after{font-size:17px}.leaflet-draw-draw-marker:after{content:'📍'}.leaflet-draw-draw-polyline:after{content:'〰'}.leaflet-draw-draw-polygon:after{content:'⬡'}.leaflet-draw-edit-edit:after{content:'✏️'}.leaflet-draw-edit-remove:after{content:'🗑'}
 @media print{body,html{height:auto!important;overflow:visible!important}.report-grid.layout-1x2{grid-template-columns:1fr!important}.report-grid.layout-3x3{grid-template-columns:repeat(3,1fr)!important}#ui-header,#statusbar,#main-view,.no-print{display:none!important}#report-overlay{display:block!important;position:relative!important;height:auto!important;overflow:visible!important}.report-toolbar{display:none!important}.report-page{padding:0!important;margin:0!important;width:100%!important}.report-grid{grid-template-columns:1fr 1fr}.report-photo-box{height:160px}}
+
+/* v4.3.3 iOS standalone header polish */
+html.ios-device.pwa-standalone #ui-header{
+  background:#20252b!important;
+  box-shadow:none!important;
+  padding-top:8px!important;
+}
+@media(max-width:760px){
+  html.ios-device.pwa-standalone .brand{display:none!important}
+  html.ios-device.pwa-standalone .header-row{
+    grid-template-columns:1fr 1fr auto!important;
+    gap:6px!important;
+  }
+  html.ios-device.pwa-standalone #ui-header{
+    padding:8px max(8px,env(safe-area-inset-right,0px)) 8px max(8px,env(safe-area-inset-left,0px))!important;
+    border-top:0!important;
+  }
+  html.ios-device.pwa-standalone .header-row .btn{min-height:42px!important}
+}
+
 input[type=file]{display:none}
 </style>
 </head>
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">專業現勘調查系統 <small>v4.3.2 PWA Safe Area</small></div>
+    <div class="brand">專業現勘調查系統 <small>v4.3.3 iOS Header Polish</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
