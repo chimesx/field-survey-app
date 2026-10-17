@@ -1,10 +1,11 @@
-const VERSION='field-app-v4.1.0';
+const VERSION='field-app-v4.2.0';
 const SHELL_CACHE=VERSION+'-shell';
 const RUNTIME_CACHE=VERSION+'-runtime';
 const TILE_CACHE=VERSION+'-tiles';
 const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
 const LIB_HOSTS=['unpkg.com','cdn.jsdelivr.net','cdnjs.cloudflare.com'];
-const TILE_HOSTS=['wmts.nlsc.gov.tw','server.arcgisonline.com'];
+const TILE_HOSTS=['server.arcgisonline.com'];
+const NO_TILE_CACHE_HOSTS=['wmts.nlsc.gov.tw'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(SHELL_CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));
@@ -49,8 +50,12 @@ self.addEventListener('fetch',event=>{
   const req=event.request; if(req.method!=='GET')return;
   const url=new URL(req.url);
   if(req.mode==='navigate'){event.respondWith(navigation(req));return;}
+  if(NO_TILE_CACHE_HOSTS.includes(url.hostname)){
+    // NLSC 圖磚採即時連線，不由本 App 大量永久快取。
+    event.respondWith(fetch(req).catch(()=>new Response('',{status:504,statusText:'Offline'}))); return;
+  }
   if(TILE_HOSTS.includes(url.hostname)){
-    // 僅快取使用者實際瀏覽過的圖磚，並限制數量，避免手機儲存空間無限增長。
+    // Esri 僅快取使用者實際瀏覽過的圖磚，並限制數量。
     event.respondWith(cacheFirst(req,TILE_CACHE,300)); return;
   }
   if(LIB_HOSTS.includes(url.hostname)){event.respondWith(staleWhileRevalidate(req));return;}

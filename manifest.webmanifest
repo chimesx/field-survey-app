@@ -1,7 +1,7 @@
 {
   "name": "專業現勘調查系統",
   "short_name": "現勘調查",
-  "description": "手機現勘照片、GPS、方位、異常紀錄與報告系統",
+  "description": "手機原生現勘體驗：現場拍照、連續 GPS、穩定方位、語音轉文字與錄音、照片與報告管理",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +9,17 @@
   "theme_color": "#20252b",
   "lang": "zh-TW",
   "icons": [
-    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
