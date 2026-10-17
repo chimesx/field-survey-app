@@ -3,20 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>專業現勘調查報告系統 v4.3.1 Mobile UX</title>
+<title>專業現勘調查報告系統 v4.3.2 iPhone PWA Safe Area Fix</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="現勘調查">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
+<script>
+(function(){
+  try{
+    var standalone=(window.navigator.standalone===true)||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
+    if(standalone) document.documentElement.classList.add('pwa-standalone');
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent)) document.documentElement.classList.add('ios-device');
+  }catch(e){}
+})();
+</script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 <style>
 :root{--primary:#0b74de;--primary2:#0758a8;--danger:#dc3545;--warning:#f39c12;--ok:#198754;--bg:#f4f6f8;--panel:#fff;--text:#1f2937;--muted:#64748b;--line:#dbe2ea}
-*{box-sizing:border-box} html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text)}
-body{display:flex;flex-direction:column;overflow:hidden}
+*{box-sizing:border-box}
+html{margin:0;height:100%;background:#20252b}
+body{margin:0;height:100vh;height:100dvh;min-height:100vh;min-height:100dvh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;overflow:hidden}
 button,input,select,textarea{font:inherit}.hidden{display:none!important}
 #ui-header{background:#20252b;color:#fff;padding:8px max(8px,env(safe-area-inset-right)) 8px max(8px,env(safe-area-inset-left));z-index:1500;box-shadow:0 2px 8px #0003}
 .header-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;margin-right:auto;white-space:nowrap}.brand small{font-weight:600;color:#b9d8ff;margin-left:5px}.mobile-more-button{display:none}.mobile-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mobile-tools-grid .btn{width:100%;min-height:52px;text-align:left;padding:12px}.mobile-tools-section{font-size:12px;font-weight:800;color:#64748b;margin:12px 0 7px}.mobile-tools-hint{font-size:12px;color:#64748b;line-height:1.5;margin-top:10px}
@@ -55,7 +66,21 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}
  .report-page{padding:12px}.report-info{grid-template-columns:1fr}.report-grid{grid-template-columns:1fr}
 }
 
-/* v4.3.1 Mobile UX */
+/* v4.3.2 iPhone / standalone PWA safe-area fix */
+html.pwa-standalone body{height:100dvh;min-height:100dvh}
+html.pwa-standalone #ui-header{padding-top:calc(env(safe-area-inset-top, 0px) + 6px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px));background:#20252b}
+html.pwa-standalone #photo-panel{padding-bottom:env(safe-area-inset-bottom,0px)}
+html.pwa-standalone .modal{max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 18px)}
+html.pwa-standalone .overlay{padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+@media(max-width:760px){
+  html.pwa-standalone #ui-header{padding-top:calc(env(safe-area-inset-top,0px) + 5px);padding-bottom:6px}
+  html.pwa-standalone #main-view{height:auto;min-height:0}
+  html.pwa-standalone #photo-panel{padding-bottom:env(safe-area-inset-bottom,0px)}
+  html.pwa-standalone .header-row{gap:5px}
+  html.pwa-standalone .header-row .btn{min-height:36px}
+}
+
+/* v4.3.2 Field Productivity / Mobile UX */
 .productivity-bar{display:flex;gap:6px;flex-wrap:wrap}.btn-active{outline:3px solid #fde68a;box-shadow:0 0 0 2px #92400e inset}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.quick-type{border:1px solid var(--line);background:#fff;border-radius:10px;padding:14px 8px;font-weight:800;cursor:pointer}.quick-type.active{background:#dbeafe;border-color:#3b82f6;color:#0758a8}.quick-status{display:flex;gap:8px;margin:10px 0}.quick-status button{flex:1}.checklist-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #edf2f7}.checklist-item input[type=checkbox]{width:22px;height:22px}.qc-list{display:flex;flex-direction:column;gap:8px}.qc-item{padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:#f8fafc}.qc-item.warn{border-color:#f5c56f;background:#fff8e8}.qc-item.error{border-color:#f0a4a4;background:#fff0f0}.qc-item.ok{border-color:#9fd3b1;background:#effaf2}.offline-box{padding:10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}.offline-progress{height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin-top:8px}.offline-progress>div{height:100%;width:0;background:#0b74de;transition:width .2s}.draw-summary{font-size:12px;color:#475569;margin-top:6px}.camera-preset{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.camera-preset button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 9px;font-size:12px}.camera-preset button.active{background:#e8f2ff;border-color:#6eb0ee;color:#0758a8;font-weight:800}.leaflet-draw-toolbar a{font-size:0}.leaflet-draw-toolbar a:after{font-size:17px}.leaflet-draw-draw-marker:after{content:'📍'}.leaflet-draw-draw-polyline:after{content:'〰'}.leaflet-draw-draw-polygon:after{content:'⬡'}.leaflet-draw-edit-edit:after{content:'✏️'}.leaflet-draw-edit-remove:after{content:'🗑'}
 @media print{body,html{height:auto!important;overflow:visible!important}.report-grid.layout-1x2{grid-template-columns:1fr!important}.report-grid.layout-3x3{grid-template-columns:repeat(3,1fr)!important}#ui-header,#statusbar,#main-view,.no-print{display:none!important}#report-overlay{display:block!important;position:relative!important;height:auto!important;overflow:visible!important}.report-toolbar{display:none!important}.report-page{padding:0!important;margin:0!important;width:100%!important}.report-grid{grid-template-columns:1fr 1fr}.report-photo-box{height:160px}}
 input[type=file]{display:none}
@@ -64,7 +89,7 @@ input[type=file]{display:none}
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">專業現勘調查系統 <small>v4.3.1 Mobile UX</small></div>
+    <div class="brand">專業現勘調查系統 <small>v4.3.2 PWA Safe Area</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>

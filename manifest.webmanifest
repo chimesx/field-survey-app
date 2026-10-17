@@ -1,7 +1,7 @@
 {
   "name": "專業現勘調查系統",
   "short_name": "現勘調查",
-  "description": "Field Productivity v4.3.1：手機精簡工具列、離線區域底圖、快速分類、連續現勘、點線面繪製、Checklist、品質檢查",
+  "description": "Field Productivity v4.3.2：修正 iPhone 主畫面 PWA 安全區與動態視窗高度，並保留離線底圖、快速分類、連續現勘、點線面繪製、Checklist、品質檢查",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
