@@ -1,4 +1,4 @@
-const VERSION='field-app-v4.3.3';
+const VERSION='field-app-v4.3.4';
 const SHELL_CACHE=VERSION+'-shell';
 const RUNTIME_CACHE=VERSION+'-runtime';
 const TILE_CACHE=VERSION+'-tiles';
@@ -50,7 +50,8 @@ self.addEventListener('fetch',event=>{
   const req=event.request; if(req.method!=='GET')return;
   const url=new URL(req.url);
   if(req.mode==='navigate'){event.respondWith(navigation(req));return;}
-  if(url.hostname==='maps.nlsc.gov.tw' && url.pathname.includes('/OpenData/wmts/')){
+  // NLSC OpenData layer: use explicitly downloaded regional caches first, then network.
+  if(url.hostname==='wmts.nlsc.gov.tw' && (url.pathname.includes('/EMAP5_OPENDATA/') || url.pathname.includes('/EMAP6_OPENDATA/'))){
     event.respondWith((async()=>{
       const keys=(await caches.keys()).filter(k=>k.startsWith('field-offline-'));
       for(const k of keys){const hit=await (await caches.open(k)).match(req); if(hit)return hit;}

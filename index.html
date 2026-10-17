@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>專業現勘調查報告系統 v4.3.3 iOS Header Polish</title>
+<title>專業現勘調查報告系統 v4.3.4 iOS Status Bar + Offline Map Fix</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="現勘調查">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <script>
@@ -103,13 +103,21 @@ html.ios-device.pwa-standalone #ui-header{
   html.ios-device.pwa-standalone .header-row .btn{min-height:42px!important}
 }
 
+/* v4.3.4 iOS PWA: use an opaque black system status bar to avoid translucent/blurred top chrome. */
+html.ios-device.pwa-standalone{background:#000!important}
+@media(max-width:760px){
+  html.ios-device.pwa-standalone body{background:#20252b!important}
+  html.ios-device.pwa-standalone #ui-header{background:#20252b!important;box-shadow:none!important}
+  html.ios-device.pwa-standalone #statusbar{background:#fff!important}
+}
+
 input[type=file]{display:none}
 </style>
 </head>
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">專業現勘調查系統 <small>v4.3.3 iOS Header Polish</small></div>
+    <div class="brand">專業現勘調查系統 <small>v4.3.4 iOS Status Bar + Offline Map Fix</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -293,9 +301,9 @@ input[type=file]{display:none}
 <div id="offline-modal" class="overlay no-print"><div class="modal">
  <div class="modal-header"><h2>⬇ 指定區域離線底圖</h2><button class="btn btn-white" onclick="closeModal('offline-modal')">✕</button></div>
  <div class="modal-body">
-  <div class="offline-box"><b>NLSC OpenData 臺灣通用電子地圖</b><div style="font-size:12px;color:#64748b;margin-top:5px">依 NLSC OpenData 方式下載目前地圖視窗範圍；OpenData 圖磚最高至 Zoom 15。高倍率現勘仍需連線或另備合法離線圖資。</div>
+  <div class="offline-box"><b>NLSC OpenData 臺灣通用電子地圖（不含等高線）</b><div style="font-size:12px;color:#64748b;margin-top:5px;line-height:1.55">下載方式：① 先把主地圖移到場址並調整到要保存的範圍；② 從「更多 → 離線底圖」開啟本視窗；③ 選 Zoom 後按「下載目前視窗」。下載完成後，切到「NLSC OpenData（離線可用）」即可在已下載範圍離線瀏覽。OpenData 原生最高 Zoom 15。</div>
    <div class="form-grid" style="margin-top:10px"><div class="field"><label>最小 Zoom</label><select id="offline-zmin"><option>12</option><option>13</option><option>14</option><option selected>15</option></select></div><div class="field"><label>最大 Zoom</label><select id="offline-zmax"><option>12</option><option>13</option><option>14</option><option selected>15</option></select></div></div>
-   <div id="offline-estimate" style="font-size:12px;margin-top:8px"></div><div class="offline-progress"><div id="offline-progress-bar"></div></div><div id="offline-progress-text" style="font-size:12px;margin-top:5px"></div>
+   <div id="offline-estimate" style="font-size:12px;margin-top:8px"></div><div id="offline-saved" style="font-size:12px;color:#166534;margin-top:5px"></div><div class="offline-progress"><div id="offline-progress-bar"></div></div><div id="offline-progress-text" style="font-size:12px;margin-top:5px"></div>
   </div>
   <div style="font-size:12px;color:#92400e;margin-top:10px">OpenStreetMap 標準圖磚僅提供線上互動瀏覽，不會納入「離線區域下載」，以符合 OSM Tile Usage Policy。</div>
  </div>
@@ -365,7 +373,7 @@ const satellite=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
 const osm=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
     maxNativeZoom:19,maxZoom:22,attribution:'© OpenStreetMap contributors'
 });
-const nlscOffline=L.tileLayer('https://maps.nlsc.gov.tw/OpenData/wmts/EMAP5_OPENDATA/default/GoogleMapsCompatible/{z}/{y}/{x}',{
+const nlscOffline=L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP6_OPENDATA/default/GoogleMapsCompatible/{z}/{y}/{x}',{
     crossOrigin:'anonymous',maxNativeZoom:15,maxZoom:22,attribution:'OpenData © 內政部國土測繪中心'
 });
 const landSection=L.tileLayer('https://wmts.nlsc.gov.tw/wmts/LANDSECT/default/GoogleMapsCompatible/{z}/{y}/{x}',{
@@ -517,11 +525,11 @@ function showDrawingSummary(){let p=0,l=0,a=0;for(const f of drawnFeatures){cons
 function tileXY(lat,lng,z){const n=2**z;const x=Math.floor((lng+180)/360*n);const r=lat*Math.PI/180;const y=Math.floor((1-Math.asinh(Math.tan(r))/Math.PI)/2*n);return{x,y}}
 function tilesForBounds(bounds,z){const nw=tileXY(bounds.getNorth(),bounds.getWest(),z),se=tileXY(bounds.getSouth(),bounds.getEast(),z),out=[];for(let x=nw.x;x<=se.x;x++)for(let y=nw.y;y<=se.y;y++)out.push({z,x,y});return out}
 function openOfflineRegion(){document.getElementById('offline-modal').style.display='flex';updateOfflineEstimate()}
-function offlineTileUrl(t){return `https://maps.nlsc.gov.tw/OpenData/wmts/EMAP5_OPENDATA/default/GoogleMapsCompatible/${t.z}/${t.y}/${t.x}`}
+function offlineTileUrl(t){return `https://wmts.nlsc.gov.tw/wmts/EMAP6_OPENDATA/default/GoogleMapsCompatible/${t.z}/${t.y}/${t.x}`}
 function currentOfflineTiles(){let z1=Number(document.getElementById('offline-zmin').value),z2=Number(document.getElementById('offline-zmax').value);if(z1>z2)[z1,z2]=[z2,z1];z1=Math.max(7,Math.min(15,z1));z2=Math.max(7,Math.min(15,z2));let out=[];for(let z=z1;z<=z2;z++)out.push(...tilesForBounds(map.getBounds(),z));return out}
-function updateOfflineEstimate(){const tiles=currentOfflineTiles();const el=document.getElementById('offline-estimate');if(el)el.textContent=`目前視窗預估 ${tiles.length} 個 OpenData 圖磚（Zoom ≤15）${tiles.length>1000?'；範圍過大，請縮小地圖視窗':''}`}
-async function downloadOfflineRegion(){if(!('caches'in window))return alert('此瀏覽器不支援離線快取');const tiles=currentOfflineTiles();if(!tiles.length)return;if(tiles.length>1000)return alert('目前區域超過 1000 個圖磚，請縮小範圍或減少 Zoom 層級。');const id='r_'+Date.now().toString(36),cache=await caches.open('field-offline-'+id);let done=0,fail=0;const bar=document.getElementById('offline-progress-bar'),txt=document.getElementById('offline-progress-text');for(const t of tiles){const url=offlineTileUrl(t);try{const r=await fetch(url,{mode:'no-cors',cache:'no-cache'});await cache.put(url,r.clone())}catch(e){fail++}done++;bar.style.width=`${done/tiles.length*100}%`;txt.textContent=`${done}/${tiles.length}｜失敗 ${fail}`;await new Promise(r=>setTimeout(r,20))}offlineRegions.push({id,cacheName:'field-offline-'+id,bounds:[[map.getBounds().getSouth(),map.getBounds().getWest()],[map.getBounds().getNorth(),map.getBounds().getEast()]],tileCount:tiles.length,downloadedAt:new Date().toISOString()});scheduleSave();if(map.hasLayer(nlsc))map.removeLayer(nlsc);if(map.hasLayer(nlscOrtho))map.removeLayer(nlscOrtho);if(map.hasLayer(satellite))map.removeLayer(satellite);if(map.hasLayer(osm))map.removeLayer(osm);nlscOffline.addTo(map);alert(`離線底圖下載完成：${tiles.length-fail}/${tiles.length} 個圖磚。\n已切換至「NLSC OpenData（離線可用）」；此圖層原生最高 Zoom 15。`)}
-async function clearOfflineRegions(){if(!confirm('清除本 App 已下載的指定區域離線底圖？'))return;const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('field-offline-')).map(k=>caches.delete(k)));offlineRegions=[];scheduleSave();document.getElementById('offline-progress-bar').style.width='0';document.getElementById('offline-progress-text').textContent='已清除'}
+function updateOfflineEstimate(){const tiles=currentOfflineTiles();const el=document.getElementById('offline-estimate');if(el)el.textContent=`目前視窗預估 ${tiles.length} 個 OpenData 圖磚（Zoom ≤15）${tiles.length>1000?'；範圍過大，請縮小地圖視窗':''}`;const saved=document.getElementById('offline-saved');if(saved)saved.textContent=offlineRegions.length?`本機已保存 ${offlineRegions.length} 個離線區域。`:'本機尚未下載離線區域。'}
+async function downloadOfflineRegion(){if(!('caches'in window))return alert('此瀏覽器不支援離線快取');if(!navigator.onLine)return alert('下載離線底圖前需要先連上網路。');const tiles=currentOfflineTiles();if(!tiles.length)return;if(tiles.length>1000)return alert('目前區域超過 1000 個圖磚，請縮小範圍或減少 Zoom 層級。');const id='r_'+Date.now().toString(36),cacheName='field-offline-'+id,cache=await caches.open(cacheName);let done=0,fail=0;const bar=document.getElementById('offline-progress-bar'),txt=document.getElementById('offline-progress-text');bar.style.width='0';txt.textContent='開始下載…';for(const t of tiles){const url=offlineTileUrl(t);try{const req=new Request(url,{mode:'no-cors',credentials:'omit',cache:'no-cache'});const r=await fetch(req);if(!r)throw new Error('no response');await cache.put(req,r.clone())}catch(e){fail++}done++;bar.style.width=`${done/tiles.length*100}%`;txt.textContent=`${done}/${tiles.length}｜成功 ${done-fail}｜失敗 ${fail}`;await new Promise(r=>setTimeout(r,12))}if(done-fail===0){await caches.delete(cacheName);return alert('離線底圖下載失敗：沒有取得任何圖磚。請確認目前已連線，再重新下載。')}offlineRegions.push({id,cacheName,bounds:[[map.getBounds().getSouth(),map.getBounds().getWest()],[map.getBounds().getNorth(),map.getBounds().getEast()]],tileCount:done-fail,requestedTileCount:tiles.length,downloadedAt:new Date().toISOString()});scheduleSave();updateOfflineEstimate();[nlsc,nlscOrtho,satellite,osm].forEach(l=>{if(map.hasLayer(l))map.removeLayer(l)});nlscOffline.addTo(map);alert(`離線底圖下載完成：${done-fail}/${tiles.length} 個圖磚。\n已切換至「NLSC OpenData（離線可用）」；此圖層原生最高 Zoom 15。`)}
+async function clearOfflineRegions(){if(!confirm('清除本 App 已下載的指定區域離線底圖？'))return;const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('field-offline-')).map(k=>caches.delete(k)));offlineRegions=[];scheduleSave();document.getElementById('offline-progress-bar').style.width='0';document.getElementById('offline-progress-text').textContent='已清除';updateOfflineEstimate()}
 function qualityIssues(){ensureProjectChecklist();const inc=photosData.filter(d=>d.include!==false);const issues=[];if(!project.name)issues.push({level:'warn',text:'尚未填寫專案名稱'});if(!project.inspectors)issues.push({level:'warn',text:'尚未填寫現勘人員'});const noGps=inc.filter(d=>!d.hasGps).length;if(noGps)issues.push({level:'error',text:`${noGps} 張納入報告的照片尚未定位`});const unc=inc.filter(d=>!d.type||d.type==='未分類').length;if(unc)issues.push({level:'warn',text:`${unc} 張照片尚未分類`});const noHeading=inc.filter(d=>normHeading(d.heading)===null).length;if(noHeading)issues.push({level:'warn',text:`${noHeading} 張照片沒有可用方位`});const abNoAction=inc.filter(d=>d.status==='abnormal'&&!d.action&&!d.condition).length;if(abNoAction)issues.push({level:'warn',text:`${abNoAction} 張異常照片沒有異常描述或處置建議`});const undone=project.checklist.filter(x=>!x.done).length;if(undone)issues.push({level:'warn',text:`Checklist 尚有 ${undone} 項未完成`});if(!issues.length)issues.push({level:'ok',text:'主要資料檢查通過，可以產生報告'});return issues}
 function showQualityCheck(){const issues=qualityIssues(),box=document.getElementById('qc-list');box.innerHTML=issues.map(x=>`<div class="qc-item ${x.level}">${x.level==='error'?'❌':x.level==='warn'?'⚠️':'✅'} ${esc(x.text)}</div>`).join('');const err=issues.filter(x=>x.level==='error').length,warn=issues.filter(x=>x.level==='warn').length;document.getElementById('qc-summary').textContent=err?`發現 ${err} 項必要修正、${warn} 項提醒`:(warn?`發現 ${warn} 項提醒`:'檢查通過');const b=document.getElementById('qc-continue-btn');b.disabled=err>0;b.title=err?'請先修正必要項目':'';document.getElementById('qc-modal').style.display='flex'}
 function continueAfterQC(){closeModal('qc-modal');document.getElementById('report-settings-modal').style.display='flex'}

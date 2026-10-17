@@ -1,11 +1,11 @@
 {
   "name": "專業現勘調查系統",
   "short_name": "現勘調查",
-  "description": "Field Productivity v4.3.2：修正 iPhone 主畫面 PWA 安全區與動態視窗高度，並保留離線底圖、快速分類、連續現勘、點線面繪製、Checklist、品質檢查",
-  "start_url": "./index.html",
+  "description": "Field Productivity v4.3.4：修正 iPhone PWA 狀態列霧化與 NLSC OpenData 離線底圖下載，並保留快速分類、連續現勘、點線面繪製、Checklist、品質檢查",
+  "start_url": "./index.html?v=4.3.4",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f6f8",
+  "background_color": "#20252b",
   "theme_color": "#20252b",
   "lang": "zh-TW",
   "icons": [
