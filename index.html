@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>專業現勘調查報告系統 v4.3 Field Productivity</title>
+<title>專業現勘調查報告系統 v4.3.1 Mobile UX</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,7 +19,7 @@
 body{display:flex;flex-direction:column;overflow:hidden}
 button,input,select,textarea{font:inherit}.hidden{display:none!important}
 #ui-header{background:#20252b;color:#fff;padding:8px max(8px,env(safe-area-inset-right)) 8px max(8px,env(safe-area-inset-left));z-index:1500;box-shadow:0 2px 8px #0003}
-.header-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;margin-right:auto;white-space:nowrap}.brand small{font-weight:600;color:#b9d8ff;margin-left:5px}
+.header-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;margin-right:auto;white-space:nowrap}.brand small{font-weight:600;color:#b9d8ff;margin-left:5px}.mobile-more-button{display:none}.mobile-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mobile-tools-grid .btn{width:100%;min-height:52px;text-align:left;padding:12px}.mobile-tools-section{font-size:12px;font-weight:800;color:#64748b;margin:12px 0 7px}.mobile-tools-hint{font-size:12px;color:#64748b;line-height:1.5;margin-top:10px}
 .btn{border:0;border-radius:8px;padding:10px 12px;color:#fff;font-weight:700;cursor:pointer;min-height:42px}.btn:disabled{opacity:.55}.btn-blue{background:var(--primary)}.btn-green{background:var(--ok)}.btn-red{background:var(--danger)}.btn-gray{background:#59636e}.btn-orange{background:#d97706}.btn-white{background:#fff;color:#24303d;border:1px solid var(--line)}
 #statusbar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);z-index:1400}.status-spacer{flex:1}.save-ok{color:var(--ok);font-weight:700}.save-working{color:var(--warning);font-weight:700}.net-online{color:var(--ok);font-weight:800}.net-offline{color:var(--danger);font-weight:800}.install-btn{display:none}
 #main-view{flex:1;display:flex;min-height:0;position:relative}.map-wrap{flex:1;position:relative;min-width:0}.map{height:100%;width:100%;background:#e8eef4}
@@ -37,8 +37,15 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}
 .camera-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.camera-meta-item{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:12px;color:#475569}.camera-meta-item b{color:#1f2937}.camera-shot-note{margin-top:8px;padding:8px;border-radius:8px;background:#ecfdf5;color:#166534;font-size:12px;font-weight:800;display:none}.audio-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:7px}.audio-player{width:100%;margin-top:7px}.audio-status{font-size:12px;color:#64748b}.audio-status.recording{color:#b42318;font-weight:800}.sensor-good{color:#166534}.sensor-warn{color:#92400e}
 
 @media(max-width:760px){
- .brand{font-size:14px;width:100%;margin-bottom:2px}.header-row .btn{padding:9px 10px;font-size:13px;flex:1}.header-row .btn.optional-mobile{display:none}
- #statusbar{font-size:11px;padding:5px 8px}.desktop-status{display:none}
+ #ui-header{padding:6px max(7px,env(safe-area-inset-right)) 6px max(7px,env(safe-area-inset-left))}
+ .header-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:center}
+ .brand{font-size:13px;width:100%;margin:0;grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+ .brand small{font-size:11px}
+ .header-row .btn{padding:8px 8px;font-size:12px;min-height:38px;white-space:nowrap}
+ .header-row .mobile-secondary,.header-row .optional-mobile,.header-row .install-btn{display:none!important}
+ .header-row .mobile-primary{display:block!important;width:100%}
+ .header-row .mobile-more-button{display:block!important;width:46px;padding:8px 6px;font-size:18px}
+ #statusbar{font-size:11px;padding:4px 8px}.desktop-status{display:none}
  #main-view{display:block}.map-wrap{height:100%}
  #photo-panel{position:absolute;left:0;right:0;bottom:0;width:auto;height:37%;border-left:0;border-top:1px solid var(--line);border-radius:14px 14px 0 0;box-shadow:0 -4px 14px #0002;transition:height .2s;overflow:hidden}
  #photo-panel.collapsed{height:54px}.panel-toolbar{padding:7px}.panel-handle{width:48px;height:5px;border-radius:999px;background:#c9d1d9;margin:0 auto 6px;cursor:pointer}.search-row input,.search-row select{padding:7px;font-size:12px}.filter-row{overflow-x:auto;white-space:nowrap;padding-bottom:2px}.filter-chip{flex:none}
@@ -48,7 +55,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}
  .report-page{padding:12px}.report-info{grid-template-columns:1fr}.report-grid{grid-template-columns:1fr}
 }
 
-/* v4.3 Field Productivity */
+/* v4.3.1 Mobile UX */
 .productivity-bar{display:flex;gap:6px;flex-wrap:wrap}.btn-active{outline:3px solid #fde68a;box-shadow:0 0 0 2px #92400e inset}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.quick-type{border:1px solid var(--line);background:#fff;border-radius:10px;padding:14px 8px;font-weight:800;cursor:pointer}.quick-type.active{background:#dbeafe;border-color:#3b82f6;color:#0758a8}.quick-status{display:flex;gap:8px;margin:10px 0}.quick-status button{flex:1}.checklist-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #edf2f7}.checklist-item input[type=checkbox]{width:22px;height:22px}.qc-list{display:flex;flex-direction:column;gap:8px}.qc-item{padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:#f8fafc}.qc-item.warn{border-color:#f5c56f;background:#fff8e8}.qc-item.error{border-color:#f0a4a4;background:#fff0f0}.qc-item.ok{border-color:#9fd3b1;background:#effaf2}.offline-box{padding:10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}.offline-progress{height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin-top:8px}.offline-progress>div{height:100%;width:0;background:#0b74de;transition:width .2s}.draw-summary{font-size:12px;color:#475569;margin-top:6px}.camera-preset{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.camera-preset button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 9px;font-size:12px}.camera-preset button.active{background:#e8f2ff;border-color:#6eb0ee;color:#0758a8;font-weight:800}.leaflet-draw-toolbar a{font-size:0}.leaflet-draw-toolbar a:after{font-size:17px}.leaflet-draw-draw-marker:after{content:'📍'}.leaflet-draw-draw-polyline:after{content:'〰'}.leaflet-draw-draw-polygon:after{content:'⬡'}.leaflet-draw-edit-edit:after{content:'✏️'}.leaflet-draw-edit-remove:after{content:'🗑'}
 @media print{body,html{height:auto!important;overflow:visible!important}.report-grid.layout-1x2{grid-template-columns:1fr!important}.report-grid.layout-3x3{grid-template-columns:repeat(3,1fr)!important}#ui-header,#statusbar,#main-view,.no-print{display:none!important}#report-overlay{display:block!important;position:relative!important;height:auto!important;overflow:visible!important}.report-toolbar{display:none!important}.report-page{padding:0!important;margin:0!important;width:100%!important}.report-grid{grid-template-columns:1fr 1fr}.report-photo-box{height:160px}}
 input[type=file]{display:none}
@@ -57,15 +64,16 @@ input[type=file]{display:none}
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">專業現勘調查系統 <small>v4.3 Field Productivity</small></div>
-    <button class="btn btn-gray" onclick="openProjectModal()">📋 案件資料</button>
-    <button class="btn btn-blue" onclick="openFieldCamera()">📷 現場拍照</button>
-    <button id="continuous-btn" class="btn btn-orange" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
-    <button class="btn btn-blue" onclick="document.getElementById('file-input').click()">🖼️ 匯入照片</button>
-    <button class="btn btn-gray" onclick="openChecklist()">☑ Checklist</button>
-    <button class="btn btn-gray" onclick="openOfflineRegion()">⬇ 離線底圖</button>
-    <button class="btn btn-green" onclick="openReportSettings()">📄 產生報告</button>
-    <button id="install-btn" class="btn btn-blue install-btn" onclick="installPWA()">⬇ 安裝到手機</button>
+    <div class="brand">專業現勘調查系統 <small>v4.3.1 Mobile UX</small></div>
+    <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
+    <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
+    <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
+    <button class="btn btn-blue mobile-primary" onclick="document.getElementById('file-input').click()">🖼️ 匯入照片</button>
+    <button class="btn btn-gray mobile-secondary" onclick="openChecklist()">☑ Checklist</button>
+    <button class="btn btn-gray mobile-secondary" onclick="openOfflineRegion()">⬇ 離線底圖</button>
+    <button class="btn btn-green mobile-secondary" onclick="openReportSettings()">📄 產生報告</button>
+    <button id="install-btn" class="btn btn-blue install-btn mobile-secondary" onclick="installPWA()">⬇ 安裝到手機</button>
+    <button class="btn btn-gray mobile-more-button" onclick="openMobileTools()" title="更多功能">☰</button>
     <button class="btn btn-gray optional-mobile" onclick="exportProject()">💾 匯出專案</button>
     <button class="btn btn-gray optional-mobile" onclick="document.getElementById('project-input').click()">📂 載入專案</button>
   </div>
@@ -103,6 +111,30 @@ input[type=file]{display:none}
    </div>
    <div id="photo-list"><div class="empty">尚未匯入照片</div></div>
  </aside>
+</div>
+
+<!-- 手機版更多功能 -->
+<div id="mobile-tools-modal" class="overlay no-print">
+ <div class="modal">
+  <div class="modal-header"><h2>☰ 更多功能</h2><button class="btn btn-white" onclick="closeModal('mobile-tools-modal')">✕</button></div>
+  <div class="modal-body">
+   <div class="mobile-tools-section">現勘作業</div>
+   <div class="mobile-tools-grid">
+    <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');openProjectModal()">📋 案件資料</button>
+    <button id="mobile-continuous-btn" class="btn btn-orange" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
+    <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');openChecklist()">☑ Checklist</button>
+    <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');openOfflineRegion()">⬇ 離線底圖</button>
+    <button class="btn btn-green" onclick="closeModal('mobile-tools-modal');openReportSettings()">📄 產生報告</button>
+    <button class="btn btn-blue" onclick="closeModal('mobile-tools-modal');installPWA()">⬇ 安裝 App</button>
+   </div>
+   <div class="mobile-tools-section">專案檔案</div>
+   <div class="mobile-tools-grid">
+    <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');exportProject()">💾 匯出專案</button>
+    <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');document.getElementById('project-input').click()">📂 載入專案</button>
+   </div>
+   <div class="mobile-tools-hint">手機首頁只保留「現場拍照、匯入照片、更多」三個主要入口，避免工具列佔用地圖畫面。</div>
+  </div>
+ </div>
 </div>
 
 <!-- 案件資料 -->
@@ -258,7 +290,7 @@ input[type=file]{display:none}
 <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-const APP_VERSION='4.3.0';
+const APP_VERSION='4.3.1';
 let deferredInstallPrompt=null;
 const TYPES=['未分類','土壤','地下水','廢棄物','排水','設備','建物','油槽','道路','其他'];
 const QUICK_TAGS=['油污','異味','積水','廢棄物','滲漏','鏽蝕','破損','植被異常','採樣點','地下水井'];
@@ -418,10 +450,11 @@ function deleteCurrentPhoto(){if(currentPhotoIndex===null||!confirm('確定刪�
 function startManualLocateFromEditor(){savePhotoEditor(false);manualLocateIndex=currentPhotoIndex;closePhotoEditor();document.getElementById('pending-banner').style.display='block';if(innerWidth<=760)document.getElementById('photo-panel').classList.add('collapsed');setTimeout(()=>map.invalidateSize(),220)}
 
 
-// ===== v4.3 Field Productivity =====
+// ===== v4.3.1 Mobile UX =====
 function ensureProjectChecklist(){if(!Array.isArray(project.checklist)||!project.checklist.length)project.checklist=DEFAULT_CHECKLIST.map(x=>({text:x,done:false}))}
 function toggleContinuousMode(){continuousMode=!continuousMode;updateContinuousButton();scheduleSave();if(continuousMode&&!document.getElementById('camera-modal').style.display)openFieldCamera()}
-function updateContinuousButton(){const b=document.getElementById('continuous-btn');if(!b)return;b.textContent=continuousMode?'🚶 連續模式：開':'🚶 連續模式：關';b.classList.toggle('btn-active',continuousMode)}
+function updateContinuousButton(){const buttons=[document.getElementById('continuous-btn'),document.getElementById('mobile-continuous-btn')].filter(Boolean);buttons.forEach(b=>{b.textContent=continuousMode?'🚶 連續模式：開':'🚶 連續模式：關';b.classList.toggle('btn-active',continuousMode)})}
+function openMobileTools(){updateContinuousButton();document.getElementById('mobile-tools-modal').style.display='flex'}
 function renderCameraPreset(){const box=document.getElementById('camera-preset');if(!box)return;box.innerHTML='';TYPES.filter(x=>x!=='未分類').slice(0,9).forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.className=t===cameraPresetType?'active':'';b.onclick=()=>{cameraPresetType=t;renderCameraPreset();scheduleSave()};box.appendChild(b)})}
 function openQuickClassify(i,returnToCamera=false){quickPhotoIndex=i;quickReturnToCamera=returnToCamera;const d=photosData[i];const g=document.getElementById('quick-type-grid');g.innerHTML='';TYPES.forEach(t=>{const b=document.createElement('button');b.className='quick-type'+((d.type||'未分類')===t?' active':'');b.textContent=t;b.onclick=()=>{g.querySelectorAll('.quick-type').forEach(x=>x.classList.remove('active'));b.classList.add('active')};g.appendChild(b)});const tg=document.getElementById('quick-tag-grid');tg.innerHTML='';QUICK_TAGS.forEach(t=>{const b=document.createElement('button');b.className='tag-pick'+((d.tags||[]).includes(t)?' active':'');b.textContent=t;b.onclick=()=>b.classList.toggle('active');tg.appendChild(b)});setQuickStatus(d.status||'normal');document.getElementById('quick-modal').style.display='flex'}
 function setQuickStatus(v){document.getElementById('quick-modal').dataset.status=v;document.getElementById('quick-normal').classList.toggle('btn-active',v==='normal');document.getElementById('quick-abnormal').classList.toggle('btn-active',v==='abnormal')}
