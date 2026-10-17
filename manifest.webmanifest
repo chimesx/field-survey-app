@@ -1,7 +1,7 @@
 {
   "name": "專業現勘調查系統",
   "short_name": "現勘調查",
-  "description": "手機原生現勘體驗：現場拍照、連續 GPS、穩定方位、語音轉文字與錄音、照片與報告管理",
+  "description": "Field Productivity：離線區域底圖、快速分類、連續現勘、點線面繪製、Checklist、品質檢查",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
