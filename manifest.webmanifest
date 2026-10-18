@@ -1,8 +1,8 @@
 {
   "name": "專業現勘調查系統",
   "short_name": "現勘調查",
-  "description": "Field Productivity v4.3.5：新增點線面單筆刪除、圖徵清單與定位改名；照片清單收合按鈕改成上下箭頭，保留 v4.3.4 既有功能",
-  "start_url": "./index.html?v=4.3.5",
+  "description": "Field Productivity v4.3.6：手機橫式自動精簡工具列及照片抽屜；直式縮放與圖層控制不再被遮擋。其餘 v4.3.5 功能完整保留。",
+  "start_url": "./index.html?v=4.3.6",
   "scope": "./",
   "display": "standalone",
   "background_color": "#20252b",

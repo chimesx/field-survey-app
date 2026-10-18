@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>專業現勘調查報告系統 v4.3.5 Field Drawing UX</title>
+<title>專業現勘調查報告系統 v4.3.6 Mobile Orientation UX</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="現勘調查">
@@ -127,13 +127,62 @@ html.ios-device.pwa-standalone{background:#000!important}
 .feature-delete-btn{background:#dc3545;color:#fff;border:0;border-radius:6px;padding:8px 10px;margin-top:8px;min-height:38px;cursor:pointer;font-weight:800}
 @media(max-width:760px){.drawing-feature-desc{min-width:100%}.drawing-feature-actions{width:100%}.drawing-feature-actions button{flex:1}.fab-panel-toggle{width:44px;height:44px}}
 
+
+/* v4.3.6 - Keep map controls reachable above the sliding photo drawer. */
+@media(max-width:760px), (orientation:landscape) and (max-height:600px) and (pointer:coarse){
+  #map .leaflet-bottom.leaflet-left{bottom:var(--field-drawer-clearance, 65px);transition:bottom .14s ease-out}
+  #map .leaflet-control-zoom a{width:38px;height:38px;line-height:38px;font-size:22px}
+  #map .leaflet-control-layers-toggle{width:40px;height:40px}
+}
+/* A landscape smartphone is still a smartphone, even if its CSS width exceeds 760px. */
+@media (orientation:landscape) and (max-height:600px) and (pointer:coarse){
+  #ui-header{padding:5px max(7px,env(safe-area-inset-right,0px)) 5px max(7px,env(safe-area-inset-left,0px))!important;box-shadow:none!important}
+  .header-row, html.ios-device.pwa-standalone .header-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 42px!important;gap:6px!important;align-items:center!important;flex-wrap:nowrap!important}
+  .header-row .brand,html.ios-device.pwa-standalone .brand{display:none!important}
+  .header-row .mobile-secondary,.header-row .optional-mobile,.header-row .install-btn{display:none!important}
+  .header-row .mobile-primary{display:block!important;width:100%;min-width:0}
+  .header-row .mobile-more-button{display:block!important;width:42px;padding:6px 4px;font-size:18px}
+  .header-row .btn,html.ios-device.pwa-standalone .header-row .btn{min-height:35px!important;max-height:38px!important;padding:6px 8px!important;font-size:13px!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}
+  #statusbar{padding:3px 8px;font-size:11px;min-height:22px;gap:5px}
+  #statusbar .desktop-status{display:none!important}
+  #main-view{display:block!important;min-height:0!important}
+  .map-wrap{height:100%!important;width:100%!important}
+  #photo-panel{position:absolute!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:min(44%,170px);border-left:0!important;border-top:1px solid var(--line)!important;border-radius:12px 12px 0 0!important;box-shadow:0 -3px 12px #0002!important;overflow:hidden!important;transition:height .2s}
+  #photo-panel.collapsed{height:42px!important}
+  #photo-panel.collapsed .search-row,#photo-panel.collapsed .filter-row,#photo-panel.collapsed #photo-list{display:none!important}
+  #photo-panel .panel-toolbar{padding:5px 8px}
+  #photo-panel .panel-handle{display:block;width:54px;height:6px;margin:1px auto 6px;border-radius:99px;background:#cbd5e1;cursor:pointer}
+  #photo-panel .search-row input,#photo-panel .search-row select{padding:5px 8px;font-size:12px}
+  #photo-panel .filter-row{gap:4px;margin-top:4px;overflow-x:auto}
+  #photo-panel .filter-chip{padding:4px 8px;font-size:11px;flex:none}
+  #photo-panel #photo-list{padding:5px;gap:5px}
+  .map-actions{top:6px!important;right:6px!important;gap:4px!important}
+  .map-actions .fab{width:36px!important;height:36px!important;min-height:36px;font-size:17px;border-radius:9px}
+  .map-actions .fab-panel-toggle{gap:0}
+  .map-actions .panel-toggle-glyph{font-size:21px}
+  .map-actions .panel-toggle-label{font-size:8px}
+  /* Draw buttons become two short horizontal rows, not a tall stack. */
+  #map .leaflet-top.leaflet-left{top:5px;left:5px}
+  /* Keep the layers switch beside (not on top of) the stacked draw/zoom tools. */
+  #map .leaflet-bottom.leaflet-left{left:138px!important}
+  #map .leaflet-top.leaflet-left .leaflet-draw-section{margin:0 0 5px}
+  #map .leaflet-top.leaflet-left .leaflet-draw-toolbar{display:flex!important;width:max-content;margin-top:0!important}
+  #map .leaflet-top.leaflet-left .leaflet-draw-toolbar a{width:33px!important;height:33px!important;line-height:33px!important;border-bottom:0!important;border-right:1px solid #ccc!important;text-align:center}
+  #map .leaflet-top.leaflet-left .leaflet-draw-toolbar a::after{font-size:16px}
+  #map .leaflet-top.leaflet-left .leaflet-control-zoom a{width:33px;height:33px;line-height:33px}
+  .overlay .modal{max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 12px)}
+  .overlay .modal-header{padding:7px 10px}
+  .overlay .modal-body{padding:9px}
+  .overlay .modal-footer{padding:7px 10px}
+}
+
 input[type=file]{display:none}
 </style>
 </head>
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">專業現勘調查系統 <small>v4.3.5 圖徵管理與清單操作</small></div>
+    <div class="brand">專業現勘調查系統 <small>v4.3.6 手機橫直式優化</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -385,7 +434,7 @@ let drawnFeatures=[],drawnLayerGroup=null,offlineRegions=[];
 const DEFAULT_CHECKLIST=['場址/廠界確認','主要出入口與道路','排水系統/排水溝','原物料/油品設施','廢棄物暫存區','地下水井/採樣點','地表污染跡象','異味/油膜/滲漏','周邊敏感受體','必要照片與方位紀錄'];
 
 const map=L.map('map',{zoomControl:false,maxZoom:22}).setView([23.5,121],7);
-L.control.zoom({position:'bottomleft'}).addTo(map);
+const zoomControl=L.control.zoom({position:'bottomleft'}).addTo(map);
 // v3.9.4：加入 EXIF 方位診斷與人工修正。保留 GPSImgDirection / GPSImgDirectionRef / Orientation 原始資訊；Orientation 不自動套用到拍攝方位。
 // v4.3：新增 OpenStreetMap 作為線上底圖；標準 OSM 圖磚不提供區域預下載。
 // 預設仍以 NLSC 臺灣通用電子地圖為底圖，並保留正射影像與 Esri 衛星影像。
@@ -613,9 +662,48 @@ async function resetProject(){if(!confirm('確定清除目前案件與所有照�
 async function waitForVisibleMapTiles(timeout=3500){const start=Date.now();while(Date.now()-start<timeout){await new Promise(r=>setTimeout(r,120));const imgs=[...document.querySelectorAll('#map .leaflet-tile-pane img.leaflet-tile')].filter(img=>{const st=getComputedStyle(img);return st.display!=='none'&&st.visibility!=='hidden'&&Number(st.opacity||1)>0});if(imgs.length&&imgs.every(img=>img.complete&&img.naturalWidth>0))return true}return false}
 async function generateReport(){const layout=document.getElementById('report-layout')?.value||'2x2';const onlyAbnormal=!!document.getElementById('report-only-abnormal')?.checked;const includeMap=document.getElementById('report-map-enabled')?.checked!==false;let included=photosData.filter(d=>d.include!==false);if(onlyAbnormal)included=included.filter(d=>d.status==='abnormal');if(!included.length)return alert(onlyAbnormal?'沒有可輸出的異常照片':'沒有可納入報告的照片');const located=included.filter(d=>d.hasGps);if(includeMap&&!located.length)return alert('納入報告的照片尚未定位，無法建立位置圖');closeModal('report-settings-modal');clusters.unspiderfy();document.getElementById('report-content').innerHTML="<h2 style='text-align:center;padding-top:100px'>正在產出報告…</h2>";let mapImg='';if(includeMap&&located.length){const reportBounds=L.latLngBounds(located.map(d=>[d.lat,d.lng])).pad(.18);map.fitBounds(reportBounds,{maxZoom:20,animate:false});map.invalidateSize();await new Promise(r=>setTimeout(r,120));await waitForVisibleMapTiles();try{const canvas=await html2canvas(document.getElementById('map'),{useCORS:true,allowTaint:false,scale:2,logging:false,backgroundColor:'#fff',ignoreElements:el=>el.classList&&el.classList.contains('leaflet-control-container')});mapImg=canvas.toDataURL('image/png')}catch(e){console.error(e);alert('地圖截圖失敗，報告仍會產生，但首頁可能沒有位置圖。')}}document.getElementById('report-overlay').style.display='block';await new Promise(r=>setTimeout(r,80));const dates=[...new Set(included.map(d=>fmtDate(d.time)))];const dateStr=dates.length>1?`${dates[0]} - ${dates[dates.length-1]}`:dates[0];const abnormal=included.filter(d=>d.status==='abnormal').length;let html=`<div class="report-page"><h1 class="report-title">現勘調查報告書</h1><div class="report-info"><div><b>專案名稱：</b>${esc(project.name||'未填')}</div><div><b>案號：</b>${esc(project.no||'未填')}</div><div><b>業主：</b>${esc(project.client||'未填')}</div><div><b>現勘日期：</b>${esc(dateStr)}</div><div><b>現勘地點：</b>${esc(project.location||'未填')}</div><div><b>現勘人員：</b>${esc(project.inspectors||'未填')}</div><div><b>天候：</b>${esc(project.weather||'未填')}</div><div><b>照片數：</b>${included.length}（異常 ${abnormal}）</div></div>${project.purpose?`<div style="background:#f6f8fa;padding:10px;border-left:4px solid #0b74de"><b>現勘目的：</b>${esc(project.purpose)}</div>`:''}${mapImg?`<img class="report-map" src="${mapImg}">`:''}</div>`;const per=layout==='1x2'?2:(layout==='3x3'?9:4);const gridClass=layout==='1x2'?'layout-1x2':(layout==='3x3'?'layout-3x3':'');for(let i=0;i<included.length;i+=per){html+=`<div class="report-page"><div class="report-title" style="font-size:19px">現勘照片紀錄（第 ${Math.floor(i/per)+1} 頁）</div><div class="report-grid ${gridClass}">`;included.slice(i,i+per).forEach((d,j)=>{const globalNo=photosData.indexOf(d)+1;const title=d.point||`NO.${globalNo}`;const tags=(d.tags||[]).join('、');html+=`<div class="report-item"><div style="display:flex;justify-content:space-between;gap:6px"><strong>[${globalNo}] ${esc(title)}｜${esc(d.type||'未分類')}</strong><span class="${d.status==='abnormal'?'report-warning':''}">${d.status==='abnormal'?'⚠ 異常':'正常'}</span></div><div class="report-photo-box"><img src="${d.url}" style="transform:rotate(${d.rotation||0}deg)"></div><div>時間：${esc(fmtDateTime(d.time))}</div><div>座標：${d.hasGps?`${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}`:'未定位'}　方位：${esc(headingText(d))}</div>${d.area?`<div>區域：${esc(d.area)}</div>`:''}${tags?`<div class="report-tags">標籤：${esc(tags)}</div>`:''}${d.condition?`<div><b>現況：</b>${esc(d.condition)}</div>`:''}${d.action?`<div><b>建議：</b>${esc(d.action)}</div>`:''}<div class="report-note">${esc(d.note||'(無備註)')}</div></div>`});html+='</div></div>'}document.getElementById('report-content').innerHTML=html}
 
+
+/* v4.3.6 responsive control positions: no data mutation. */
+const FIELD_COMPACT_MEDIA='(max-width: 760px), (orientation: landscape) and (max-height: 600px) and (pointer: coarse)';
+const FIELD_LANDSCAPE_MEDIA='(orientation: landscape) and (max-height: 600px) and (pointer: coarse)';
+let fieldLastCompact=null,fieldWasLandscape=false,fieldPreLandscapeCollapsed=false,fieldResizeTimer=null;
+function fieldCompact(){return window.matchMedia(FIELD_COMPACT_MEDIA).matches}
+function fieldLandscape(){return window.matchMedia(FIELD_LANDSCAPE_MEDIA).matches}
+function updateFieldDrawerClearance(){
+ const panel=document.getElementById('photo-panel'), mapEl=document.getElementById('map');
+ if(!panel||!mapEl)return;
+ const clearance=fieldCompact()?Math.ceil(panel.getBoundingClientRect().height)+9:0;
+ mapEl.style.setProperty('--field-drawer-clearance',clearance+'px');
+}
+function syncFieldScreenLayout(){
+ const compact=fieldCompact(),landscape=fieldLandscape();
+ const panel=document.getElementById('photo-panel');
+ if(landscape&&!fieldWasLandscape){
+  fieldPreLandscapeCollapsed=panel.classList.contains('collapsed');
+  panel.classList.add('collapsed'); // Maximise visible map when rotating.
+ }else if(!landscape&&fieldWasLandscape){
+  panel.classList.toggle('collapsed',fieldPreLandscapeCollapsed);
+ }
+ fieldWasLandscape=landscape;
+ if(compact!==fieldLastCompact){
+  zoomControl.setPosition(compact?'topleft':'bottomleft');
+  fieldLastCompact=compact;
+ }
+ updatePhotoPanelToggle();
+ updateFieldDrawerClearance();
+ requestAnimationFrame(()=>map.invalidateSize({pan:false}));
+}
+const fieldPhotoPanel=document.getElementById('photo-panel');
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(updateFieldDrawerClearance).observe(fieldPhotoPanel);
+window.addEventListener('orientationchange',()=>setTimeout(syncFieldScreenLayout,260));
+window.addEventListener('resize',()=>{
+ clearTimeout(fieldResizeTimer);
+ fieldResizeTimer=setTimeout(syncFieldScreenLayout,130);
+});
+
 window.addEventListener('resize',()=>setTimeout(()=>map.invalidateSize(),100));
 window.addEventListener('beforeunload',()=>{if(saveTimer)clearTimeout(saveTimer);stopCameraStream();stopGeoWatch();stopAudioRecord()});
-(async function init(){updatePhotoPanelToggle();const t=document.getElementById('e-type');t.innerHTML=TYPES.map(x=>`<option>${x}</option>`).join('');document.getElementById('e-heading').addEventListener('change',()=>refreshHeadingEditor(true));document.getElementById('offline-zmin')?.addEventListener('change',updateOfflineEstimate);document.getElementById('offline-zmax')?.addEventListener('change',updateOfflineEstimate);refreshTypeFilter();await openDB();await restoreState();ensureProjectChecklist();restoreDrawnFeatures();updateContinuousButton();renderCameraPreset();setTimeout(()=>map.invalidateSize(),250)})();
+(async function init(){syncFieldScreenLayout();updatePhotoPanelToggle();const t=document.getElementById('e-type');t.innerHTML=TYPES.map(x=>`<option>${x}</option>`).join('');document.getElementById('e-heading').addEventListener('change',()=>refreshHeadingEditor(true));document.getElementById('offline-zmin')?.addEventListener('change',updateOfflineEstimate);document.getElementById('offline-zmax')?.addEventListener('change',updateOfflineEstimate);refreshTypeFilter();await openDB();await restoreState();ensureProjectChecklist();restoreDrawnFeatures();updateContinuousButton();renderCameraPreset();setTimeout(()=>map.invalidateSize(),250)})();
 
 updateNetworkStatus();
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Service Worker 註冊失敗',e));
