@@ -1,8 +1,8 @@
 {
-  "name": "專業現勘調查系統",
+  "name": "現勘調查",
   "short_name": "現勘調查",
-  "description": "Field Survey App v4.3.9",
-  "start_url": "./index.html?v=4.3.9",
+  "description": "Field Survey App v4.4",
+  "start_url": "./index.html?v=4.4",
   "scope": "./",
   "display": "standalone",
   "background_color": "#20252b",
@@ -13,19 +13,19 @@
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/icon-1024.png",
-      "sizes": "1024x1024",
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
   ]
 }

@@ -1,8 +1,8 @@
-const VERSION='field-app-v4.3.9';
+const VERSION='field-app-v4.4';
 const SHELL_CACHE=VERSION+'-shell';
 const RUNTIME_CACHE=VERSION+'-runtime';
 const TILE_CACHE=VERSION+'-tiles';
-const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
+const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/apple-touch-icon.png','./icons/icon-maskable-512.png'];
 const LIB_HOSTS=['unpkg.com','cdn.jsdelivr.net','cdnjs.cloudflare.com'];
 const TILE_HOSTS=['server.arcgisonline.com'];
 const NO_TILE_CACHE_HOSTS=['wmts.nlsc.gov.tw','tile.openstreetmap.org'];
