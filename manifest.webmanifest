@@ -1,8 +1,8 @@
 {
   "name": "現勘調查",
   "short_name": "現勘調查",
-  "description": "Field Survey App v4.4",
-  "start_url": "./index.html?v=4.4",
+  "description": "Field Survey App v4.4.1",
+  "start_url": "./index.html?v=4.4.1",
   "scope": "./",
   "display": "standalone",
   "background_color": "#20252b",

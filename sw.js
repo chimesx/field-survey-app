@@ -1,4 +1,4 @@
-const VERSION='field-app-v4.4';
+const VERSION='field-app-v4.4.1';
 const SHELL_CACHE=VERSION+'-shell';
 const RUNTIME_CACHE=VERSION+'-runtime';
 const TILE_CACHE=VERSION+'-tiles';

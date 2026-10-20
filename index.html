@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>Field Survey App v4.4</title>
+<title>Field Survey App v4.4.1</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="現勘調查">
@@ -178,7 +178,7 @@ html.ios-device.pwa-standalone{background:#000!important}
 
 input[type=file]{display:none}
 
-/* v4.4: timeline, gallery status and backup visibility */
+/* v4.4.1: timeline, gallery status and backup visibility */
 .album-confirm-strip{background:#effaf4;border:1px solid #a6d9bb;border-radius:9px;padding:9px;margin-top:8px;font-size:12px}
 .album-caption{font-size:11px;line-height:1.45;color:#416654;margin-top:5px}
 .backup-health{font-size:12px;line-height:1.65;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px;margin:8px 0;overflow-wrap:anywhere}
@@ -204,12 +204,26 @@ input[type=file]{display:none}
 .timeline-event-actions button{min-height:31px;padding:5px 8px;font-size:12px}
 @media(max-width:760px){.timeline-event{grid-template-columns:45px 64px minmax(0,1fr);gap:7px}.timeline-event img{height:64px;width:64px}.timeline-controls{gap:7px}.timeline-controls label{flex:1}.timeline-controls .check-row{flex-basis:100%}}
 
+
+/* v4.4.1 手機快速紀錄 / 桌機進階分頁 / PWA PDF */
+.photo-edit-dialog{width:min(940px,100%)}.editor-mobile-summary{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;background:#f8fafc;padding:10px;margin-bottom:12px}.editor-mobile-summary img{width:70px;height:70px;flex:none;object-fit:cover;border-radius:8px;background:#e5e7eb}.editor-mobile-summary b{display:block;font-size:15px}.editor-mobile-summary #editor-quick-meta{margin-top:5px;font-size:12px;color:#64748b;line-height:1.5}.editor-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:12px}.editor-tab{flex:1;border:1px solid var(--line);background:#f1f5f9;border-radius:8px;padding:10px 7px;font-weight:800;cursor:pointer}.editor-tab.active{background:#dbeafe;color:#0758a8;border-color:#86b9ed}.editor-tab-panel{display:none}.editor-tab-panel.active{display:block}.editor-advanced{display:contents}.editor-advanced>summary{display:none}.editor-coord{font-size:12px;line-height:1.6;color:#64748b;margin-bottom:10px}.editor-footer{flex-wrap:wrap}.editor-footer .btn{min-height:42px}.camera-mode-selector{display:flex;align-items:center;gap:9px;margin-top:10px;flex-wrap:wrap;font-size:12px}.camera-mode-selector select{flex:1;min-width:220px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px}.report-toolbar{flex-wrap:wrap}.report-pdf-message{padding:9px 14px;background:#eff6ff;color:#1d4a76;font-size:12px;border-bottom:1px solid #bfdbfe}.report-pdf-message.error{background:#fff1f2;color:#b42318}.report-pdf-message.ready{background:#ecfdf5;color:#166534}
+@media(max-width:760px),(orientation:landscape) and (max-height:600px) and (pointer:coarse){
+ .photo-edit-dialog{width:100%;max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 12px);border-radius:15px;display:flex;flex-direction:column;overflow:hidden}
+ .photo-edit-dialog .modal-header{flex:none}.photo-edit-dialog .modal-body{overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1}.photo-edit-dialog .modal-footer{flex:none;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))!important}
+ .photo-edit-dialog .modal-header h2{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .editor-tabs{display:none}.editor-tab-panel#editor-record-panel{display:block!important}.editor-record-grid{display:flex;flex-direction:column;gap:12px}.editor-record-grid>.field{order:10}.editor-record-grid .editor-point{order:1}.editor-record-grid .editor-type{order:2}.editor-record-grid .editor-status{order:3}.editor-record-grid .editor-note{order:4}.editor-record-grid .editor-area{order:5}.editor-record-grid .editor-tags{order:6}.editor-record-grid .editor-condition{order:7}.editor-record-grid .editor-action{order:8}.editor-record-grid .editor-include{order:9}
+ .editor-record-grid .field label{font-size:14px}.editor-record-grid input,.editor-record-grid select,.editor-record-grid textarea{font-size:16px;min-height:45px}.editor-record-grid textarea{min-height:118px}
+ .editor-advanced{display:block;border:1px solid var(--line);border-radius:12px;margin-top:16px;overflow:hidden}.editor-advanced>summary{display:block;padding:12px;background:#f1f5f9;font-size:13px;font-weight:800;cursor:pointer;list-style-position:inside}
+ .editor-advanced .editor-tab-panel{display:block!important;padding:11px}.editor-advanced #editor-location-panel{border-bottom:1px solid var(--line)}
+ .editor-advanced .heading-row button{font-size:12px;padding:7px;min-height:36px}.editor-advanced .editor-preview{height:180px}.editor-footer .btn{font-size:13px;flex:1;padding:9px 6px}.editor-footer #save-next-btn{flex:1.2}
+ .report-toolbar .btn{font-size:12px;min-height:39px}.report-toolbar #report-print{display:none}
+}
 </style>
 </head>
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">Field Survey App <small>v4.4</small></div>
+    <div class="brand">Field Survey App <small>v4.4.1</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -264,7 +278,7 @@ input[type=file]{display:none}
  <div class="modal">
   <div class="modal-header"><h2>☰ 更多功能</h2><button class="btn btn-white" onclick="closeModal('mobile-tools-modal')">✕</button></div>
   <div class="modal-body">
-   <div style="font-size:12px;color:#64748b;font-weight:700;margin-bottom:10px">Field Survey App v4.4</div><div class="mobile-tools-section">現勘作業</div>
+   <div style="font-size:12px;color:#64748b;font-weight:700;margin-bottom:10px">Field Survey App v4.4.1</div><div class="mobile-tools-section">現勘作業</div>
    <div class="mobile-tools-grid">
     <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');openProjectModal()">📋 案件資料</button>
     <button id="mobile-continuous-btn" class="btn btn-orange" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -327,9 +341,10 @@ input[type=file]{display:none}
   <div class="modal-body">
    <div class="camera-stage"><video id="camera-video" autoplay playsinline muted></video><div class="camera-hud"><span id="camera-gps" class="camera-chip">📍 GPS 取得中</span><span id="camera-heading" class="camera-chip">🧭 方位取得中</span></div></div>
    <div class="camera-meta-grid"><div class="camera-meta-item"><b>定位：</b><span id="camera-gps-detail">等待高精度定位</span></div><div class="camera-meta-item"><b>方位：</b><span id="camera-heading-detail">等待感測器</span></div></div>
-   <div id="camera-shot-note" class="camera-shot-note">✓ 已完成拍攝</div><div id="camera-album-row" class="camera-album-row hidden"><button id="camera-save-to-album" class="btn btn-green" type="button" onclick="shareLatestCapturedPhoto()">📲 分享新拍照片／存到相簿</button><span>iPhone 請選「儲存影像」；無法從網頁確認是否已入相簿。</span></div>
+   <div id="camera-shot-note" class="camera-shot-note" role="status" aria-live="polite">✓ 已完成拍攝</div><div id="camera-album-row" class="camera-album-row hidden"><button id="camera-save-to-album" class="btn btn-green" type="button" onclick="shareLatestCapturedPhoto()">📲 分享新拍照片／存到相簿</button><span>iPhone 請選「儲存影像」；無法從網頁確認是否已入相簿。</span></div>
    <div><b style="font-size:12px">快速分類預設：</b><div id="camera-preset" class="camera-preset"></div></div>
-   <div class="camera-note">連續模式：拍照後保持相機開啟。原始影像模式已啟用時，優先嘗試硬體拍照；若不支援則僅保留完整取景畫格（不是相機原檔）。若要保留手機相機給出的原始 HEIC/JPG，請使用「使用手機相機」。</div>
+   <div class="camera-mode-selector"><label for="camera-quality-mode"><b>拍攝模式：</b></label><select id="camera-quality-mode"><option value="fast" selected>快速快門（立即擷取，適合連續現勘）</option><option value="hardware">高畫質優先（支援時使用硬體拍照）</option></select></div>
+   <div class="camera-note">連續模式：拍照後保持相機開啟。快速模式立即擷取取景畫面（不是手機相簿原始相機檔）；高畫質模式在瀏覽器支援時嘗試硬體拍照。GPS 持續背景更新，按快門不等待新定位。若要保留手機相機給出的原始 HEIC/JPG，請使用「使用手機相機」。</div>
   </div>
   <div class="modal-footer"><button class="btn btn-gray" onclick="useNativeCameraFallback()">使用手機相機</button><button class="btn btn-blue" onclick="captureFieldPhoto('continue')">📷 拍照並繼續</button><button class="btn btn-green" onclick="captureFieldPhoto('edit')">● 拍照後編輯</button></div>
  </div>
@@ -348,61 +363,49 @@ input[type=file]{display:none}
   <div class="modal-footer"><button class="btn btn-gray" onclick="openFullEditorFromQuick()">完整編輯</button><button class="btn btn-blue" onclick="saveQuickClassify()">完成</button></div>
  </div>
 </div>
-<!-- 照片編輯 -->
+<!-- 照片編輯：手機先輸入，桌機三頁籤 -->
 <div id="photo-modal" class="overlay no-print">
- <div class="modal large">
+ <div class="modal large photo-edit-dialog">
   <div class="modal-header"><h2 id="photo-editor-title">照片紀錄</h2><button class="btn btn-white" onclick="closePhotoEditor()">✕</button></div>
   <div class="modal-body">
-   <div class="photo-editor-top">
-    <div>
-      <div class="editor-preview"><img id="editor-img" alt="preview"></div>
-      <div class="mini-actions">
-       <button class="btn btn-gray" onclick="rotatePhoto(-90)">↶ 左轉</button><button class="btn btn-gray" onclick="rotatePhoto(90)">↷ 右轉</button>
-       <button class="btn btn-orange" onclick="startManualLocateFromEditor()">📍 指定位置</button>
-       <button class="btn btn-gray" onclick="movePhoto(-1)">↑ 前移</button><button class="btn btn-gray" onclick="movePhoto(1)">↓ 後移</button>
-       <button class="btn btn-green" type="button" onclick="shareCurrentPhoto()">📤 分享／存入相簿</button>
-       <button class="btn btn-blue" type="button" onclick="downloadCurrentPhoto()">⬇ 下載 JPG</button><button class="btn btn-gray" type="button" onclick="downloadCurrentOriginal()">📁 取出原始／來源檔</button>
-      </div>
-      <div class="album-confirm-strip"><label class="check-row"><input id="e-album-confirmed" type="checkbox" onchange="confirmAlbumSaved(this.checked)"><span>我已在手機相簿確認可看到這張照片</span></label><div id="e-album-status" class="album-caption">開啟手機分享面板不代表已成功儲存；請以相簿實際看到照片為準。</div></div>
-      <div id="original-photo-status" style="font-size:11px;line-height:1.45;color:#64748b;margin-top:5px">JPEG 用於瀏覽與報告；來源檔是否保留將依照片顯示。GPS 與備註請以 CSV／專案備份為準。</div>
-      <div id="editor-coord" style="font-size:12px;color:#64748b;margin-top:8px"></div>
-      <div class="heading-panel">
-       <div class="heading-row"><b>🧭 拍攝方位</b><span id="heading-cardinal" class="heading-chip">未知</span><span id="heading-confidence" class="heading-confidence low">需確認</span></div>
-       <div class="heading-row" style="margin-top:7px">
-        <button class="btn btn-gray" type="button" onclick="adjustHeading(-90)">−90°</button>
-        <button class="btn btn-gray" type="button" onclick="adjustHeading(-5)">−5°</button>
-        <input id="e-heading" type="number" min="0" max="359.9" step="0.1" placeholder="0–359.9">
-        <button class="btn btn-gray" type="button" onclick="adjustHeading(5)">+5°</button>
-        <button class="btn btn-gray" type="button" onclick="adjustHeading(90)">+90°</button>
-       </div>
-       <div class="heading-row" style="margin-top:7px">
-        <button class="btn btn-blue" type="button" onclick="applyAutoHeadingToCurrent()">✨ 自動校正</button>
-        <button class="btn btn-gray" type="button" onclick="resetHeadingToExif()">↺ 原始 EXIF</button>
-        <button class="btn btn-green" type="button" onclick="learnHeadingRule()">🧠 記住此裝置校正</button>
-        <button class="btn btn-gray" type="button" onclick="clearHeadingRule()">清除裝置規則</button>
-       </div>
-       <div id="heading-debug" class="heading-debug"></div>
-       <div id="heading-device-rule" class="device-rule"></div>
-      </div>
+   <div class="editor-mobile-summary"><img id="editor-quick-thumbnail" alt="照片縮圖"><div><b id="editor-quick-title">現勘快速紀錄</b><div id="editor-quick-meta">時間與定位</div></div></div>
+   <div class="editor-tabs"><button type="button" class="editor-tab active" data-tab="record" onclick="showEditorTab('record')">📝 現勘紀錄</button><button type="button" class="editor-tab" data-tab="location" onclick="showEditorTab('location')">🧭 定位／方位</button><button type="button" class="editor-tab" data-tab="photo" onclick="showEditorTab('photo')">🖼️ 照片／原檔</button></div>
+   <section id="editor-record-panel" class="editor-tab-panel active">
+    <div class="form-grid editor-record-grid">
+      <div class="field editor-point"><label>點位編號</label><input id="e-point" placeholder="例如 P01"></div>
+      <div class="field editor-type"><label>現勘類型</label><select id="e-type"></select></div>
+      <div class="field editor-status"><label>現勘狀態</label><select id="e-status"><option value="normal">✓ 正常</option><option value="abnormal">⚠ 異常</option></select></div>
+      <div class="field full editor-note"><label>📝 現勘備註（主要輸入區）</label><textarea id="e-note" placeholder="記錄現場狀況、位置、異常或需要注意的事項…"></textarea><div class="voice-row"><button id="voice-btn" class="btn btn-orange" type="button" onclick="toggleVoiceNote()">🎙️ 語音轉文字</button><span id="voice-status" class="voice-status">支援時會將辨識文字加入備註；部分瀏覽器需要網路。</span></div><div class="audio-row"><button id="audio-record-btn" class="btn btn-gray" type="button" onclick="toggleAudioRecord()">🎤 錄音留存</button><button id="audio-delete-btn" class="btn btn-red hidden" type="button" onclick="deleteVoiceAudio()">刪除錄音</button><span id="audio-status" class="audio-status">現場錄音最長 60 秒，會跟著專案 JSON 備份。</span></div><audio id="voice-audio-player" class="audio-player hidden" controls></audio></div>
+      <div class="field editor-area"><label>調查區域</label><input id="e-area" placeholder="例如 A區／東側"></div>
+      <div class="field full editor-tags"><label>快速標籤（可複選）</label><div id="tag-picker" class="tag-picker"></div></div>
+      <div class="field full editor-condition"><label>現況／異常描述</label><input id="e-condition" placeholder="例如：排水溝表面發現油膜"></div>
+      <div class="field full editor-action"><label>後續處置建議</label><input id="e-action" placeholder="例如：建議後續採樣確認"></div>
+      <div class="field full editor-include"><label class="check-row"><input type="checkbox" id="e-include"> 納入正式報告</label></div>
     </div>
-    <div class="form-grid" style="align-content:start">
-      <div class="field"><label>點位編號</label><input id="e-point" placeholder="例如 P01"></div>
-      <div class="field"><label>類型</label><select id="e-type"></select></div>
-      <div class="field"><label>區域</label><input id="e-area" placeholder="例如 A區 / 東側"></div>
-      <div class="field"><label>狀態</label><select id="e-status"><option value="normal">正常</option><option value="abnormal">⚠ 異常</option></select></div>
-      <div class="field full"><label>快速標籤（可複選）</label><div id="tag-picker" class="tag-picker"></div></div>
-      <div class="field full"><label>現況 / 異常描述</label><input id="e-condition" placeholder="例如：排水溝表面發現油膜"></div>
-      <div class="field full"><label>處置建議</label><input id="e-action" placeholder="例如：建議後續採樣確認"></div>
-      <div class="field full"><label>詳細備註</label><textarea id="e-note"></textarea><div class="voice-row"><button id="voice-btn" class="btn btn-orange" type="button" onclick="toggleVoiceNote()">🎙️ 語音轉文字</button><span id="voice-status" class="voice-status">支援時會將辨識文字加入備註；部分瀏覽器需要網路。</span></div><div class="audio-row"><button id="audio-record-btn" class="btn btn-gray" type="button" onclick="toggleAudioRecord()">🎤 錄音留存</button><button id="audio-delete-btn" class="btn btn-red hidden" type="button" onclick="deleteVoiceAudio()">刪除錄音</button><span id="audio-status" class="audio-status">可保留最多 60 秒現場語音，會跟著專案 JSON 備份。</span></div><audio id="voice-audio-player" class="audio-player hidden" controls></audio></div>
-      <div class="field full"><label class="check-row"><input type="checkbox" id="e-include"> 納入正式報告</label></div>
-    </div>
-   </div>
-   <div class="danger-zone"><button class="btn btn-red" onclick="deleteCurrentPhoto()">🗑 刪除這張照片</button></div>
+   </section>
+   <details id="editor-advanced" class="editor-advanced"><summary>⚙️ 進階資料：定位、方位校正、照片與來源檔</summary>
+    <section id="editor-location-panel" class="editor-tab-panel">
+     <div id="editor-coord" class="editor-coord"></div>
+     <button class="btn btn-orange" type="button" onclick="startManualLocateFromEditor()">📍 手動指定照片位置</button>
+     <div class="heading-panel">
+      <div class="heading-row"><b>🧭 拍攝方位</b><span id="heading-cardinal" class="heading-chip">未知</span><span id="heading-confidence" class="heading-confidence low">需確認</span></div>
+      <div class="heading-row" style="margin-top:7px"><button class="btn btn-gray" type="button" onclick="adjustHeading(-90)">−90°</button><button class="btn btn-gray" type="button" onclick="adjustHeading(-5)">−5°</button><input id="e-heading" type="number" min="0" max="359.9" step="0.1" placeholder="0–359.9"><button class="btn btn-gray" type="button" onclick="adjustHeading(5)">+5°</button><button class="btn btn-gray" type="button" onclick="adjustHeading(90)">+90°</button></div>
+      <div class="heading-row" style="margin-top:7px"><button class="btn btn-blue" type="button" onclick="applyAutoHeadingToCurrent()">✨ 自動校正</button><button class="btn btn-gray" type="button" onclick="resetHeadingToExif()">↺ 原始 EXIF</button><button class="btn btn-green" type="button" onclick="learnHeadingRule()">🧠 記住此裝置校正</button><button class="btn btn-gray" type="button" onclick="clearHeadingRule()">清除裝置規則</button></div>
+      <div id="heading-debug" class="heading-debug"></div><div id="heading-device-rule" class="device-rule"></div>
+     </div>
+    </section>
+    <section id="editor-photo-panel" class="editor-tab-panel">
+     <div class="editor-preview"><img id="editor-img" alt="照片原圖預覽"></div>
+     <div class="mini-actions"><button class="btn btn-gray" onclick="rotatePhoto(-90)">↶ 左轉</button><button class="btn btn-gray" onclick="rotatePhoto(90)">↷ 右轉</button><button class="btn btn-gray" onclick="movePhoto(-1)">↑ 前移</button><button class="btn btn-gray" onclick="movePhoto(1)">↓ 後移</button><button class="btn btn-green" type="button" onclick="shareCurrentPhoto()">📤 分享／存入相簿</button><button class="btn btn-blue" type="button" onclick="downloadCurrentPhoto()">⬇ 下載 JPG</button><button class="btn btn-gray" type="button" onclick="downloadCurrentOriginal()">📁 取出原始／來源檔</button></div>
+     <div class="album-confirm-strip"><label class="check-row"><input id="e-album-confirmed" type="checkbox" onchange="confirmAlbumSaved(this.checked)"><span>我已在手機相簿確認可看到這張照片</span></label><div id="e-album-status" class="album-caption">請以相簿實際看到照片為準。</div></div>
+     <div id="original-photo-status" style="font-size:12px;line-height:1.5;color:#64748b;margin-top:8px">來源檔保存狀態</div>
+     <div class="danger-zone"><button class="btn btn-red" onclick="deleteCurrentPhoto()">🗑 刪除這張照片</button></div>
+    </section>
+   </details>
   </div>
-  <div class="modal-footer"><button class="btn btn-blue" onclick="savePhotoEditor()">儲存照片紀錄</button></div>
+  <div class="modal-footer editor-footer"><button class="btn btn-white" type="button" onclick="closePhotoEditor()">取消</button><button id="save-next-btn" class="btn btn-gray" onclick="savePhotoAndNext()">儲存並下一張 →</button><button class="btn btn-blue" onclick="savePhotoEditor()">✓ 儲存紀錄</button></div>
  </div>
 </div>
-
 
 <!-- 現勘紀錄時間軸（按真實拍攝時間排序，不等同連續 GPS 軌跡） -->
 <div id="timeline-modal" class="overlay no-print"><div class="modal timeline-modal">
@@ -474,7 +477,7 @@ input[type=file]{display:none}
 </div>
 
 <div id="report-overlay">
- <div class="report-toolbar no-print"><button class="btn btn-red" onclick="document.getElementById('report-overlay').style.display='none'">⬅ 返回編輯</button><button class="btn btn-green" onclick="window.print()">🖨️ 列印 / 存為 PDF</button></div>
+ <div class="report-toolbar no-print"><button class="btn btn-red" onclick="document.getElementById('report-overlay').style.display='none'">⬅ 返回編輯</button><button id="report-generate-pdf" class="btn btn-blue" onclick="createDirectPdf()">📄 產生 PDF</button><button id="report-download-pdf" class="btn btn-green hidden" onclick="downloadReadyPdf()">⬇ 儲存 PDF</button><button id="report-share-pdf" class="btn btn-green hidden" onclick="shareReadyPdf()">📤 分享 PDF</button><button id="report-print" class="btn btn-gray" onclick="window.print()">🖨️ 傳統列印</button></div><div id="report-pdf-message" class="report-pdf-message no-print" role="status">iPhone 主畫面 App 請先按「產生 PDF」，完成後再選擇分享或儲存；不需使用列印功能。</div>
  <div id="report-content"></div>
 </div>
 
@@ -484,7 +487,7 @@ input[type=file]{display:none}
 <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-const APP_VERSION='4.4';
+const APP_VERSION='4.4.1';
 let deferredInstallPrompt=null;
 const TYPES=['未分類','土壤','地下水','廢棄物','排水','設備','建物','油槽','道路','其他'];
 const QUICK_TAGS=['油污','異味','積水','廢棄物','滲漏','鏽蝕','破損','植被異常','採樣點','地下水井'];
@@ -615,28 +618,58 @@ function stopCameraStream(){if(cameraStream){cameraStream.getTracks().forEach(t=
 function closeFieldCamera(){stopCameraStream();stopGeoWatch();document.getElementById('camera-modal').style.display='none'}
 function useNativeCameraFallback(){stopCameraStream();stopGeoWatch();document.getElementById('camera-modal').style.display='none';enableOrientationSensor().finally(()=>document.getElementById('capture-input').click())}
 async function makeCapturedRecord(dataUrl,name,geo,heading,source='系統相機'){const hasGps=!!geo&&Number.isFinite(geo.lat)&&Number.isFinite(geo.lng);const h=normHeading(heading);return {id:uid(),lat:hasGps?geo.lat:null,lng:hasGps?geo.lng:null,hasGps,time:new Date(),url:dataUrl,name,heading:h,exifHeading:null,headingRef:'T',exifOrientation:null,deviceMake:'Browser',deviceModel:navigator.userAgentData?.platform||navigator.platform||'',deviceSoftware:navigator.userAgent||'',headingMode:h===null?'auto':'manual',headingSource:h===null?'現場感測器未取得':source,headingConfidence:h===null?'low':'manual',rotation:0,point:'',type:'未分類',area:'',status:'normal',tags:[],condition:'',action:'',note:'',include:true,captureAccuracy:geo?.accuracy??null,captureMethod:source,captureMeta:{gpsTimestamp:geo?.timestamp||null,headingSampleCount:headingSamples.filter(x=>Date.now()-x.t<=1600).length,capturedAt:new Date().toISOString()},voiceAudio:null}}
+let cameraShotBusy=false;
+function cameraShotNotice(msg,isError=false){const n=document.getElementById('camera-shot-note');n.textContent=msg;n.style.display='block';n.style.background=isError?'#fff1f2':'#ecfdf5';n.style.color=isError?'#b42318':'#166534';}
 async function captureFieldPhoto(mode='edit'){
- const video=document.getElementById('camera-video');if(!cameraStream||!video.videoWidth)return alert('相機尚未準備完成');
- const fresh=await geoOnce({enableHighAccuracy:true,timeout:3500,maximumAge:1000});
- let geo=fresh||bestCameraGeo||lastCameraGeo;if(fresh&&bestCameraGeo&&Number.isFinite(bestCameraGeo.accuracy)&&bestCameraGeo.accuracy<fresh.accuracy)geo=bestCameraGeo;
- const stable=stableLiveHeading();let originalBlob=null,sourceLabel='';let dataUrl;
- if(preserveOriginals&&typeof ImageCapture!=='undefined'){
-  try{const track=cameraStream.getVideoTracks()[0];const capture=new ImageCapture(track);originalBlob=await capture.takePhoto();if(!originalBlob?.size)throw new Error('empty camera image');sourceLabel='ImageCapture 硬體拍照';dataUrl=await compressImage(originalBlob)}catch(e){console.warn('ImageCapture 無法取得硬體照片，改保留取景影像',e);originalBlob=null}
- }
- if(!originalBlob){
-  const sourceCanvas=document.createElement('canvas');sourceCanvas.width=video.videoWidth;sourceCanvas.height=video.videoHeight;sourceCanvas.getContext('2d').drawImage(video,0,0,sourceCanvas.width,sourceCanvas.height);
-  if(preserveOriginals){originalBlob=await new Promise(resolve=>sourceCanvas.toBlob(resolve,'image/jpeg',.98));sourceLabel='完整取景畫格（非原始相機檔）'}
-  const max=1800,scale=Math.min(1,max/Math.max(sourceCanvas.width,sourceCanvas.height));
-  if(scale<1){const canvas=document.createElement('canvas');canvas.width=Math.round(sourceCanvas.width*scale);canvas.height=Math.round(sourceCanvas.height*scale);canvas.getContext('2d').drawImage(sourceCanvas,0,0,canvas.width,canvas.height);dataUrl=canvas.toDataURL('image/jpeg',.88)}
-  else dataUrl=sourceCanvas.toDataURL('image/jpeg',.88);
- }
- const name=`FIELD_${new Date().toISOString().replace(/[:.]/g,'-')}.jpg`;
- const d=await makeCapturedRecord(dataUrl,name,geo,stable,'現場即時感測（穩定方位）');
- if(originalBlob&&preserveOriginals)await saveOriginal(d,originalBlob,name,sourceLabel);
- if(continuousMode&&cameraPresetType&&cameraPresetType!=='未分類')d.type=cameraPresetType;
- photosData.push(d);lastCapturedPhotoId=d.id;const albumRow=document.getElementById('camera-album-row');if(albumRow)albumRow.classList.toggle('hidden',!galleryReminder);scheduleSave();render();if(continuousMode)mode='continue';
- if(mode==='continue'){const note=document.getElementById('camera-shot-note');note.textContent=`✓ 已拍攝第 ${photosData.length} 張｜GPS ${geo?`±${Math.round(geo.accuracy||0)}m`:'未取得'}｜方位 ${headingToCardinal(stable)}`;note.style.display='block';setTimeout(()=>note.style.display='none',1800);if(continuousMode)setTimeout(()=>openQuickClassify(photosData.length-1,true),180)}
- else{closeFieldCamera();openPhotoEditor(photosData.length-1)}
+ if(cameraShotBusy)return;
+ const video=document.getElementById('camera-video');
+ if(!cameraStream||!video.videoWidth)return alert('相機尚未準備完成');
+ cameraShotBusy=true;
+ const btns=[...document.querySelectorAll('#camera-modal .modal-footer button')];
+ btns.forEach(b=>b.disabled=true);
+ const shotTime=new Date();
+ // 快門觸發時先確定影像及感測器快照；不等待 GPS、寫入資料庫或壓縮。
+ const geoCandidates=[lastCameraGeo,bestCameraGeo].filter(g=>g&&Number.isFinite(g.lat)&&Number.isFinite(g.lng)&&Date.now()-(g.timestamp||0)<60000);
+ const geo=geoCandidates.sort((a,b)=>(a.accuracy||9999)-(b.accuracy||9999))[0]||null;
+ const heading=stableLiveHeading();
+ const quality=document.getElementById('camera-quality-mode')?.value||'fast';
+ const name=`FIELD_${shotTime.toISOString().replace(/[:.]/g,'-')}.jpg`;
+ let frame=null,hardwarePromise=null;
+ try{
+  if(quality==='hardware'&&typeof ImageCapture!=='undefined'){
+   try{hardwarePromise=new ImageCapture(cameraStream.getVideoTracks()[0]).takePhoto()}catch(e){console.warn('ImageCapture 不支援',e)}
+  }
+  if(!hardwarePromise){frame=document.createElement('canvas');frame.width=video.videoWidth;frame.height=video.videoHeight;frame.getContext('2d').drawImage(video,0,0,frame.width,frame.height);}
+  cameraShotNotice(`✓ 已觸發拍攝（${shotTime.toLocaleTimeString('zh-TW')}），背景處理中…`);
+  await new Promise(resolve=>requestAnimationFrame(resolve));
+  let originalBlob=null,dataUrl=null,sourceLabel='';
+  if(hardwarePromise){
+   try{originalBlob=await hardwarePromise;dataUrl=await compressImage(originalBlob);sourceLabel='ImageCapture 硬體來源影像';}
+   catch(e){console.warn('硬體拍攝失敗，改取影片畫格',e);frame=document.createElement('canvas');frame.width=video.videoWidth;frame.height=video.videoHeight;frame.getContext('2d').drawImage(video,0,0,frame.width,frame.height);}
+  }
+  if(!dataUrl){
+   if(preserveOriginals){originalBlob=await new Promise(resolve=>frame.toBlob(resolve,'image/jpeg',.96));sourceLabel='完整取景畫格（非相機原始檔）'}
+   const scale=Math.min(1,1800/Math.max(frame.width,frame.height));
+   const small=document.createElement('canvas');small.width=Math.round(frame.width*scale);small.height=Math.round(frame.height*scale);
+   small.getContext('2d').drawImage(frame,0,0,small.width,small.height);
+   dataUrl=await new Promise((resolve,reject)=>small.toBlob(async b=>{if(!b)return reject(new Error('影像壓縮失敗'));resolve(await blobToDataURL(b))},'image/jpeg',.88));
+  }
+  const d=await makeCapturedRecord(dataUrl,name,geo,heading,'現場即時感測（穩定方位）');
+  d.time=shotTime;d.captureMeta={...d.captureMeta,capturedAt:shotTime.toISOString(),gpsAgeMs:geo?Math.max(0,shotTime.getTime()-(geo.timestamp||0)):null,captureQuality:quality};
+  if(continuousMode&&cameraPresetType&&cameraPresetType!=='未分類')d.type=cameraPresetType;
+  photosData.push(d);lastCapturedPhotoId=d.id;
+  scheduleSave();render();
+  const albumRow=document.getElementById('camera-album-row');if(albumRow)albumRow.classList.toggle('hidden',!galleryReminder);
+  cameraShotNotice(`✓ 第 ${photosData.length} 張已完成｜${geo?'GPS ±'+Math.round(geo.accuracy||0)+'m':'待定位'}｜儲存${preserveOriginals&&originalBlob?'原始／來源影像中…':'中…'}`);
+  if(originalBlob&&preserveOriginals){await saveOriginal(d,originalBlob,name,sourceLabel);scheduleSave()}
+  // 報告影像及來源影像落入 IndexedDB 才解除連拍鎖定。
+  await saveState();
+  cameraShotNotice(`✓ 第 ${photosData.length} 張已儲存｜可繼續拍攝`);
+  if(continuousMode)mode='continue';
+  if(mode==='edit'){closeFieldCamera();openPhotoEditor(photosData.indexOf(d))}
+  else if(continuousMode)setTimeout(()=>{if(cameraStream)openQuickClassify(photosData.indexOf(d),true)},250);
+ }catch(e){console.error('拍攝處理失敗',e);cameraShotNotice(`⚠ 拍攝失敗：${e.message}`,true)}
+ finally{cameraShotBusy=false;btns.forEach(b=>b.disabled=false)}
 }
 document.getElementById('capture-input').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const geo=await geoOnce({enableHighAccuracy:true,timeout:5000,maximumAge:1000})||lastCameraGeo;let exif={};try{exif=await exifr.parse(file,{gps:true,tiff:true,exif:true})||{}}catch(_){}const url=await compressImage(file);const exifGps=Number.isFinite(exif.latitude)&&Number.isFinite(exif.longitude)?{lat:exif.latitude,lng:exif.longitude,accuracy:null,timestamp:null}:null;const useGeo=exifGps||geo;const sensorH=stableLiveHeading();const h=sensorH??normHeading(exif.GPSImgDirection);const d=await makeCapturedRecord(url,file.name||`FIELD_${Date.now()}.jpg`,useGeo,h,sensorH!==null?'現場感測器（原生相機）':'手機相機 EXIF');d.exifHeading=normHeading(exif.GPSImgDirection);d.headingRef=exif.GPSImgDirectionRef||'';d.exifOrientation=exif.Orientation??null;d.deviceMake=exif.Make||d.deviceMake;d.deviceModel=exif.Model||d.deviceModel;d.deviceSoftware=exif.Software||d.deviceSoftware;if(sensorH===null&&d.exifHeading!==null){d.headingMode='auto';applyAutoCalibration(d)}await saveOriginal(d,file,file.name||d.name,'手機原生相機回傳檔案');photosData.push(d);scheduleSave();render();openPhotoEditor(photosData.length-1)}catch(err){console.error(err);alert('拍照匯入失敗：'+err.message)}e.target.value=''});
 function getSpeechRecognition(){return window.SpeechRecognition||window.webkitSpeechRecognition||null}
@@ -669,7 +702,9 @@ function saveProjectForm(){project={...project,name:document.getElementById('p-n
 function closeModal(id){document.getElementById(id).style.display='none'}
 
 function updateHeadingPanel(){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];const h=normHeading(d.heading),eh=normHeading(d.exifHeading);const inp=document.getElementById('e-heading');inp.value=h===null?'':h.toFixed(1);document.getElementById('heading-cardinal').textContent=h===null?'未知':headingCardinal(h);const cm=confidenceMeta(d),ce=document.getElementById('heading-confidence');ce.className=`heading-confidence ${cm.cls}`;ce.textContent=cm.text;const ref=d.headingRef?`${d.headingRef}${d.headingRef==='T'?'（真北）':d.headingRef==='M'?'（磁北）':''}`:'未記錄';const rule=getHeadingRule(d);document.getElementById('heading-debug').innerHTML=`原始 EXIF：<b>${eh===null?'未記錄':eh.toFixed(1)+'°'}</b>｜Ref：<b>${esc(ref)}</b>｜Orientation：<b>${esc(d.exifOrientation??'未記錄')}</b><br>目前顯示：<b>${h===null?'未知':h.toFixed(1)+'° '+headingCardinal(h)}</b>｜模式：<b>${esc(d.headingMode||'auto')}</b>｜來源：<b>${esc(d.headingSource||'none')}</b>`;document.getElementById('heading-device-rule').innerHTML=`裝置：<b>${esc(deviceLabel(d))}</b>${d.deviceSoftware?`｜相機軟體：${esc(d.deviceSoftware)}`:''}<br>此 Orientation 的裝置規則：<b>${rule?fmtOffset(rule.offset)+'（已學習）':'尚未建立；目前保留原始 EXIF'}</b><br><span class="heading-unknown">系統不會只因 iPhone / Samsung / Android 或 Orientation 就硬套 ±90°；只有已學習的「型號＋Orientation」規則才會自動校正。</span>`}
-function openPhotoEditor(i){currentPhotoIndex=i;const d=photosData[i];document.getElementById('photo-editor-title').textContent=`照片 ${i+1}｜${d.name||''}`;document.getElementById('editor-img').src=d.url;document.getElementById('editor-img').style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('e-point').value=d.point||'';document.getElementById('e-area').value=d.area||'';document.getElementById('e-status').value=d.status||'normal';document.getElementById('e-condition').value=d.condition||'';document.getElementById('e-action').value=d.action||'';document.getElementById('e-note').value=d.note||'';document.getElementById('e-include').checked=d.include!==false;document.getElementById('e-album-confirmed').checked=!!d.albumConfirmedAt;updateAlbumStatusText(d);const ts=document.getElementById('e-type');ts.innerHTML=TYPES.map(t=>`<option>${t}</option>`).join('');ts.value=d.type||'未分類';renderTagPicker(d.tags||[]);updateHeadingPanel();updateVoiceAudioUI();updateOriginalEditorStatus().catch(console.error);document.getElementById('editor-coord').textContent=d.hasGps?`GPS：${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}${d.captureAccuracy?`（±${Math.round(d.captureAccuracy)}m）`:''}｜拍攝：${fmtDateTime(d.time)}${d.captureMethod?`｜${d.captureMethod}`:''}`:`⚠ 此照片沒有 GPS，請使用「指定位置」後點擊地圖。`;document.getElementById('photo-modal').style.display='flex'}
+function showEditorTab(name){document.querySelectorAll('.editor-tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===name));const mapping={record:'editor-record-panel',location:'editor-location-panel',photo:'editor-photo-panel'};document.querySelectorAll('#photo-modal .editor-tab-panel').forEach(el=>el.classList.toggle('active',el.id===mapping[name]));const panel=document.querySelector('#photo-modal .modal-body');if(panel)panel.scrollTop=0}
+function savePhotoAndNext(){if(currentPhotoIndex===null)return;const next=currentPhotoIndex+1;savePhotoEditor(false);if(next>=photosData.length){closePhotoEditor();return}openPhotoEditor(next)}
+function openPhotoEditor(i){currentPhotoIndex=i;const d=photosData[i];document.getElementById('photo-editor-title').textContent=`照片 ${i+1}｜${d.name||''}`;document.getElementById('editor-img').src=d.url;document.getElementById('editor-img').style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('e-point').value=d.point||'';document.getElementById('e-area').value=d.area||'';document.getElementById('e-status').value=d.status||'normal';document.getElementById('e-condition').value=d.condition||'';document.getElementById('e-action').value=d.action||'';document.getElementById('e-note').value=d.note||'';document.getElementById('e-include').checked=d.include!==false;document.getElementById('e-album-confirmed').checked=!!d.albumConfirmedAt;updateAlbumStatusText(d);const ts=document.getElementById('e-type');ts.innerHTML=TYPES.map(t=>`<option>${t}</option>`).join('');ts.value=d.type||'未分類';renderTagPicker(d.tags||[]);updateHeadingPanel();updateVoiceAudioUI();updateOriginalEditorStatus().catch(console.error);document.getElementById('editor-coord').textContent=d.hasGps?`GPS：${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}${d.captureAccuracy?`（±${Math.round(d.captureAccuracy)}m）`:''}｜拍攝：${fmtDateTime(d.time)}${d.captureMethod?`｜${d.captureMethod}`:''}`:`⚠ 此照片沒有 GPS，請使用「指定位置」後點擊地圖。`;const quickImg=document.getElementById('editor-quick-thumbnail');quickImg.src=d.url;quickImg.style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('editor-quick-title').textContent=`${d.point||'照片 '+(i+1)}｜${d.type||'未分類'}`;document.getElementById('editor-quick-meta').textContent=`${fmtDateTime(d.time)}｜${d.hasGps?'📍 已定位':'⚠ 待定位'}｜方位 ${headingText(d)}`;const nextButton=document.getElementById('save-next-btn');nextButton.disabled=i>=photosData.length-1;showEditorTab('record');document.getElementById('editor-advanced').open=!window.matchMedia('(max-width:760px), (orientation:landscape) and (max-height:600px) and (pointer:coarse)').matches;document.getElementById('photo-modal').style.display='flex';document.querySelector('#photo-modal .modal-body').scrollTop=0}
 function refreshHeadingEditor(markManual=false){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];const inp=document.getElementById('e-heading');const h=inp.value===''?null:normHeading(inp.value);d.heading=h;if(markManual){d.headingMode='manual';d.headingSource='人工修正';d.headingConfidence='manual'}updateHeadingPanel();scheduleSave();render()}
 function adjustHeading(delta){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex],base=normHeading(d.heading)??normHeading(d.exifHeading)??0;d.heading=normHeading(base+delta);d.headingMode='manual';d.headingSource='人工修正';d.headingConfidence='manual';updateHeadingPanel();scheduleSave();render()}
 function resetHeadingToExif(){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];d.heading=normHeading(d.exifHeading);d.headingMode='raw';d.headingSource=d.heading===null?'無 EXIF 方位':'原始 EXIF';d.headingConfidence=d.heading===null?'low':'medium';updateHeadingPanel();scheduleSave();render()}
@@ -753,7 +788,7 @@ function continueAfterQC(){closeModal('qc-modal');document.getElementById('repor
 
 function safeFileName(v){return String(v||'現勘專案').replace(/[\\/:*?"<>|]/g,'_')}
 function downloadBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1200)}
-// ===== v4.4：取回拍攝照片（資料仍只存於本機 IndexedDB，不會自動進手機相簿） =====
+// ===== v4.4.1：取回拍攝照片（資料仍只存於本機 IndexedDB，不會自動進手機相簿） =====
 function jpegBlobFromRecord(d){
  if(!d||typeof d.url!=='string'||!d.url.startsWith('data:image/'))throw new Error('找不到已保存的照片影像');
  const comma=d.url.indexOf(','),header=d.url.slice(0,comma),value=d.url.slice(comma+1);
@@ -885,7 +920,7 @@ window.addEventListener('online',updateNetworkStatus);window.addEventListener('o
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;const b=document.getElementById('install-btn');if(b)b.style.display='inline-block'});
 window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;const b=document.getElementById('install-btn');if(b)b.style.display='none'});
 async function installPWA(){if(!deferredInstallPrompt){alert('若瀏覽器沒有顯示安裝按鈕，可使用瀏覽器選單的「加入主畫面 / 安裝 App」。PWA 需由 HTTPS 網址開啟。');return}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;const b=document.getElementById('install-btn');if(b)b.style.display='none'}
-// ===== v4.4 現勘紀錄時間軸 =====
+// ===== v4.4.1 現勘紀錄時間軸 =====
 function timelineDay(d){return normalizeDate(d.time).toLocaleDateString('sv-SE')}
 function timelineFiltered(){const day=document.getElementById('timeline-date')?.value||'',filter=document.getElementById('timeline-filter')?.value||'all';return photosData.map((d,i)=>({d,i})).filter(({d})=>(!day||timelineDay(d)===day)&&(filter!=='abnormal'||d.status==='abnormal')&&(filter!=='pending'||!d.hasGps)).sort((a,b)=>normalizeDate(a.d.time)-normalizeDate(b.d.time)||a.i-b.i)}
 function openTimeline(){
@@ -930,7 +965,7 @@ function exportProject(){const payload={app:'專業現勘調查報告系統',ver
 async function resetProject(){if(!confirm('確定清除目前案件與所有照片？建議先匯出專案備份。'))return;photosData=[];drawnFeatures=[];offlineRegions=[];timelinePathLayer.clearLayers();backupInfo={zipExportRequestedAt:null};lastCapturedPhotoId=null;project={name:'',no:'',client:'',location:'',inspectors:'',weather:'',purpose:'',checklist:DEFAULT_CHECKLIST.map(x=>({text:x,done:false}))};drawnLayerGroup.clearLayers();await dbClear();await originalClear();fillProjectForm();render();closeModal('project-modal');alert('已清除本機專案')}
 
 async function waitForVisibleMapTiles(timeout=3500){const start=Date.now();while(Date.now()-start<timeout){await new Promise(r=>setTimeout(r,120));const imgs=[...document.querySelectorAll('#map .leaflet-tile-pane img.leaflet-tile')].filter(img=>{const st=getComputedStyle(img);return st.display!=='none'&&st.visibility!=='hidden'&&Number(st.opacity||1)>0});if(imgs.length&&imgs.every(img=>img.complete&&img.naturalWidth>0))return true}return false}
-async function generateReport(){const layout=document.getElementById('report-layout')?.value||'2x2';const onlyAbnormal=!!document.getElementById('report-only-abnormal')?.checked;const includeMap=document.getElementById('report-map-enabled')?.checked!==false;let included=photosData.filter(d=>d.include!==false);if(onlyAbnormal)included=included.filter(d=>d.status==='abnormal');if(!included.length)return alert(onlyAbnormal?'沒有可輸出的異常照片':'沒有可納入報告的照片');const located=included.filter(d=>d.hasGps);if(includeMap&&!located.length)return alert('納入報告的照片尚未定位，無法建立位置圖');closeModal('report-settings-modal');clusters.unspiderfy();document.getElementById('report-content').innerHTML="<h2 style='text-align:center;padding-top:100px'>正在產出報告…</h2>";let mapImg='';if(includeMap&&located.length){const reportBounds=L.latLngBounds(located.map(d=>[d.lat,d.lng])).pad(.18);map.fitBounds(reportBounds,{maxZoom:20,animate:false});map.invalidateSize();await new Promise(r=>setTimeout(r,120));await waitForVisibleMapTiles();try{const canvas=await html2canvas(document.getElementById('map'),{useCORS:true,allowTaint:false,scale:2,logging:false,backgroundColor:'#fff',ignoreElements:el=>el.classList&&el.classList.contains('leaflet-control-container')});mapImg=canvas.toDataURL('image/png')}catch(e){console.error(e);alert('地圖截圖失敗，報告仍會產生，但首頁可能沒有位置圖。')}}document.getElementById('report-overlay').style.display='block';await new Promise(r=>setTimeout(r,80));const dates=[...new Set(included.map(d=>fmtDate(d.time)))];const dateStr=dates.length>1?`${dates[0]} - ${dates[dates.length-1]}`:dates[0];const abnormal=included.filter(d=>d.status==='abnormal').length;let html=`<div class="report-page"><h1 class="report-title">現勘調查報告書</h1><div class="report-info"><div><b>專案名稱：</b>${esc(project.name||'未填')}</div><div><b>案號：</b>${esc(project.no||'未填')}</div><div><b>業主：</b>${esc(project.client||'未填')}</div><div><b>現勘日期：</b>${esc(dateStr)}</div><div><b>現勘地點：</b>${esc(project.location||'未填')}</div><div><b>現勘人員：</b>${esc(project.inspectors||'未填')}</div><div><b>天候：</b>${esc(project.weather||'未填')}</div><div><b>照片數：</b>${included.length}（異常 ${abnormal}）</div></div>${project.purpose?`<div style="background:#f6f8fa;padding:10px;border-left:4px solid #0b74de"><b>現勘目的：</b>${esc(project.purpose)}</div>`:''}${mapImg?`<img class="report-map" src="${mapImg}">`:''}</div>`;const per=layout==='1x2'?2:(layout==='3x3'?9:4);const gridClass=layout==='1x2'?'layout-1x2':(layout==='3x3'?'layout-3x3':'');for(let i=0;i<included.length;i+=per){html+=`<div class="report-page"><div class="report-title" style="font-size:19px">現勘照片紀錄（第 ${Math.floor(i/per)+1} 頁）</div><div class="report-grid ${gridClass}">`;included.slice(i,i+per).forEach((d,j)=>{const globalNo=photosData.indexOf(d)+1;const title=d.point||`NO.${globalNo}`;const tags=(d.tags||[]).join('、');html+=`<div class="report-item"><div style="display:flex;justify-content:space-between;gap:6px"><strong>[${globalNo}] ${esc(title)}｜${esc(d.type||'未分類')}</strong><span class="${d.status==='abnormal'?'report-warning':''}">${d.status==='abnormal'?'⚠ 異常':'正常'}</span></div><div class="report-photo-box"><img src="${d.url}" style="transform:rotate(${d.rotation||0}deg)"></div><div>時間：${esc(fmtDateTime(d.time))}</div><div>座標：${d.hasGps?`${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}`:'未定位'}　方位：${esc(headingText(d))}</div>${d.area?`<div>區域：${esc(d.area)}</div>`:''}${tags?`<div class="report-tags">標籤：${esc(tags)}</div>`:''}${d.condition?`<div><b>現況：</b>${esc(d.condition)}</div>`:''}${d.action?`<div><b>建議：</b>${esc(d.action)}</div>`:''}<div class="report-note">${esc(d.note||'(無備註)')}</div></div>`});html+='</div></div>'}document.getElementById('report-content').innerHTML=html}
+async function generateReport(){resetReadyPdf();const layout=document.getElementById('report-layout')?.value||'2x2';const onlyAbnormal=!!document.getElementById('report-only-abnormal')?.checked;const includeMap=document.getElementById('report-map-enabled')?.checked!==false;let included=photosData.filter(d=>d.include!==false);if(onlyAbnormal)included=included.filter(d=>d.status==='abnormal');if(!included.length)return alert(onlyAbnormal?'沒有可輸出的異常照片':'沒有可納入報告的照片');const located=included.filter(d=>d.hasGps);if(includeMap&&!located.length)return alert('納入報告的照片尚未定位，無法建立位置圖');closeModal('report-settings-modal');clusters.unspiderfy();document.getElementById('report-content').innerHTML="<h2 style='text-align:center;padding-top:100px'>正在產出報告…</h2>";let mapImg='';if(includeMap&&located.length){const reportBounds=L.latLngBounds(located.map(d=>[d.lat,d.lng])).pad(.18);map.fitBounds(reportBounds,{maxZoom:20,animate:false});map.invalidateSize();await new Promise(r=>setTimeout(r,120));await waitForVisibleMapTiles();try{const canvas=await html2canvas(document.getElementById('map'),{useCORS:true,allowTaint:false,scale:2,logging:false,backgroundColor:'#fff',ignoreElements:el=>el.classList&&el.classList.contains('leaflet-control-container')});mapImg=canvas.toDataURL('image/png')}catch(e){console.error(e);alert('地圖截圖失敗，報告仍會產生，但首頁可能沒有位置圖。')}}document.getElementById('report-overlay').style.display='block';await new Promise(r=>setTimeout(r,80));const dates=[...new Set(included.map(d=>fmtDate(d.time)))];const dateStr=dates.length>1?`${dates[0]} - ${dates[dates.length-1]}`:dates[0];const abnormal=included.filter(d=>d.status==='abnormal').length;let html=`<div class="report-page"><h1 class="report-title">現勘調查報告書</h1><div class="report-info"><div><b>專案名稱：</b>${esc(project.name||'未填')}</div><div><b>案號：</b>${esc(project.no||'未填')}</div><div><b>業主：</b>${esc(project.client||'未填')}</div><div><b>現勘日期：</b>${esc(dateStr)}</div><div><b>現勘地點：</b>${esc(project.location||'未填')}</div><div><b>現勘人員：</b>${esc(project.inspectors||'未填')}</div><div><b>天候：</b>${esc(project.weather||'未填')}</div><div><b>照片數：</b>${included.length}（異常 ${abnormal}）</div></div>${project.purpose?`<div style="background:#f6f8fa;padding:10px;border-left:4px solid #0b74de"><b>現勘目的：</b>${esc(project.purpose)}</div>`:''}${mapImg?`<img class="report-map" src="${mapImg}">`:''}</div>`;const per=layout==='1x2'?2:(layout==='3x3'?9:4);const gridClass=layout==='1x2'?'layout-1x2':(layout==='3x3'?'layout-3x3':'');for(let i=0;i<included.length;i+=per){html+=`<div class="report-page"><div class="report-title" style="font-size:19px">現勘照片紀錄（第 ${Math.floor(i/per)+1} 頁）</div><div class="report-grid ${gridClass}">`;included.slice(i,i+per).forEach((d,j)=>{const globalNo=photosData.indexOf(d)+1;const title=d.point||`NO.${globalNo}`;const tags=(d.tags||[]).join('、');html+=`<div class="report-item"><div style="display:flex;justify-content:space-between;gap:6px"><strong>[${globalNo}] ${esc(title)}｜${esc(d.type||'未分類')}</strong><span class="${d.status==='abnormal'?'report-warning':''}">${d.status==='abnormal'?'⚠ 異常':'正常'}</span></div><div class="report-photo-box"><img src="${d.url}" style="transform:rotate(${d.rotation||0}deg)"></div><div>時間：${esc(fmtDateTime(d.time))}</div><div>座標：${d.hasGps?`${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}`:'未定位'}　方位：${esc(headingText(d))}</div>${d.area?`<div>區域：${esc(d.area)}</div>`:''}${tags?`<div class="report-tags">標籤：${esc(tags)}</div>`:''}${d.condition?`<div><b>現況：</b>${esc(d.condition)}</div>`:''}${d.action?`<div><b>建議：</b>${esc(d.action)}</div>`:''}<div class="report-note">${esc(d.note||'(無備註)')}</div></div>`});html+='</div></div>'}document.getElementById('report-content').innerHTML=html}
 
 
 /* v4.3.6 responsive control positions: no data mutation. */
@@ -976,6 +1011,55 @@ window.addEventListener('beforeunload',()=>{if(saveTimer)clearTimeout(saveTimer)
 (async function init(){syncFieldScreenLayout();updatePhotoPanelToggle();const t=document.getElementById('e-type');t.innerHTML=TYPES.map(x=>`<option>${x}</option>`).join('');document.getElementById('e-heading').addEventListener('change',()=>refreshHeadingEditor(true));document.getElementById('offline-zmin')?.addEventListener('change',updateOfflineEstimate);document.getElementById('offline-zmax')?.addEventListener('change',updateOfflineEstimate);refreshTypeFilter();await openDB();await restoreState();ensureProjectChecklist();restoreDrawnFeatures();updateContinuousButton();renderCameraPreset();setTimeout(()=>map.invalidateSize(),250)})();
 
 updateNetworkStatus();
+
+// ===== v4.4.1 離線可用的裝置端 PDF 匯出（A4、逐頁 JPEG，無需 window.print） =====
+let readyPdfBlob=null,readyPdfName='';
+function resetReadyPdf(){readyPdfBlob=null;readyPdfName='';document.getElementById('report-download-pdf')?.classList.add('hidden');document.getElementById('report-share-pdf')?.classList.add('hidden');const m=document.getElementById('report-pdf-message');if(m){m.className='report-pdf-message no-print';m.textContent='iPhone 主畫面 App 請使用「產生 PDF」後再分享或儲存，不必開啟列印視窗。'}}
+function pdfMsg(text,isError=false){const el=document.getElementById('report-pdf-message');el.className='report-pdf-message no-print'+(isError?' error':'');el.textContent=text;}
+// Pure PDF 1.4 writer, one DCT JPEG per A4 page. Simplifies offline operation, with all report text rasterized.
+function buildJpegPdf(jpegs){if(!jpegs.length)throw new Error('沒有可匯出的報告頁面');const enc=new TextEncoder();const chunks=[];let length=0;const offsets=[0];const push=(data)=>{const bytes=typeof data==='string'?enc.encode(data):data;chunks.push(bytes);length+=bytes.byteLength};const begin=(id)=>{offsets[id]=length;push(`${id} 0 obj\n`)};const end=()=>push('endobj\n');
+ push('%PDF-1.4\n%PDF-FieldSurvey\n');
+ begin(1);push('<< /Type /Catalog /Pages 2 0 R >>\n');end();
+ begin(2);push('<< /Type /Pages /Count '+jpegs.length+' /Kids ['+jpegs.map((_,i)=>(3+i*3)+' 0 R').join(' ')+'] >>\n');end();
+ jpegs.forEach((j,i)=>{const id=3+i*3,imId=id+2,contentId=id+1;
+  begin(id);push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im1 ${imId} 0 R >> >> /Contents ${contentId} 0 R >>\n`);end();
+  const content=enc.encode('q\n595.28 0 0 841.89 0 0 cm\n/Im1 Do\nQ\n');
+  begin(contentId);push(`<< /Length ${content.length} >>\nstream\n`);push(content);push('endstream\n');end();
+  begin(imId);push(`<< /Type /XObject /Subtype /Image /Width ${j.width} /Height ${j.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${j.bytes.byteLength} >>\nstream\n`);push(j.bytes);push('\nendstream\n');end();
+ });
+ const xrefStart=length;const count=3+jpegs.length*3;push(`xref\n0 ${count}\n0000000000 65535 f \n`);for(let i=1;i<count;i++)push(String(offsets[i]).padStart(10,'0')+' 00000 n \n');
+ push(`trailer\n<< /Size ${count} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`);return new Blob(chunks,{type:'application/pdf'});
+}
+async function canvasToJpegPayload(canvas){const blob=await new Promise((resolve,reject)=>canvas.toBlob(x=>x?resolve(x):reject(new Error('JPEG 轉換失敗')),'image/jpeg',.87));return {bytes:new Uint8Array(await blob.arrayBuffer()),width:canvas.width,height:canvas.height}}
+async function createDirectPdf(){const btn=document.getElementById('report-generate-pdf');if(btn.disabled)return;if(typeof html2canvas!=='function'){pdfMsg('缺少報表渲染函式庫，請先連線重新載入 App。',true);return}
+ btn.disabled=true;btn.textContent='製作 PDF 中…';resetReadyPdf();const stage=document.createElement('div');stage.style.cssText='position:absolute;left:0;top:0;z-index:-1;pointer-events:none;width:794px;background:#fff;';document.body.appendChild(stage);
+ try{
+  const pages=[...document.querySelectorAll('#report-content > .report-page')];if(!pages.length)throw new Error('請先產生報告預覽');
+  const jpgs=[];let done=0;const targetRatio=297/210;
+  for(const node of pages){
+   pdfMsg(`正在製作 PDF：報告區塊 ${++done}/${pages.length}（已完成 ${jpgs.length} 頁）…`);
+   await new Promise(r=>setTimeout(r,0));
+   stage.replaceChildren();const copy=node.cloneNode(true);copy.style.cssText='width:794px;max-width:none;margin:0;padding:22px;box-sizing:border-box;background:#fff;page-break-after:auto;';stage.appendChild(copy);
+   const layout=copy.querySelector('.report-grid');if(layout)layout.style.gridTemplateColumns=layout.classList.contains('layout-1x2')?'1fr':layout.classList.contains('layout-3x3')?'repeat(3,1fr)':'repeat(2,1fr)';
+   const info=copy.querySelector('.report-info');if(info)info.style.gridTemplateColumns='1fr 1fr';
+   const canvas=await html2canvas(copy,{useCORS:true,allowTaint:false,scale:1.35,logging:false,backgroundColor:'#fff',windowWidth:1200,scrollX:0,scrollY:0});
+   const pagePixelHeight=Math.round(canvas.width*targetRatio);
+   for(let y=0;y<canvas.height;y+=pagePixelHeight){
+    if(jpgs.length>=150)throw new Error('PDF 超過 150 頁上限，請分批產生報告');
+    const sheet=document.createElement('canvas');sheet.width=canvas.width;sheet.height=pagePixelHeight;const ctx=sheet.getContext('2d',{alpha:false});ctx.fillStyle='#fff';ctx.fillRect(0,0,sheet.width,sheet.height);const h=Math.min(pagePixelHeight,canvas.height-y);ctx.drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+    jpgs.push(await canvasToJpegPayload(sheet));sheet.width=1;sheet.height=1;
+   }
+   canvas.width=1;canvas.height=1;stage.replaceChildren();
+  }
+  readyPdfBlob=buildJpegPdf(jpgs);readyPdfName=`${safeFileName(project.name||'現勘調查')}_${new Date().toISOString().slice(0,10)}.pdf`;
+  document.getElementById('report-download-pdf').classList.remove('hidden');document.getElementById('report-share-pdf').classList.remove('hidden');
+  const mb=(readyPdfBlob.size/1048576).toFixed(1);pdfMsg(`✓ 已產生 ${jpgs.length} 頁 PDF（${mb} MB）。請按「儲存 PDF」或「分享 PDF」取回檔案。`);document.getElementById('report-pdf-message').classList.add('ready');
+ }catch(err){console.error('PDF 匯出失敗',err);pdfMsg('PDF 製作失敗：'+(err?.message||err)+'。可回 Safari 使用傳統列印。',true)}
+ finally{stage.remove();btn.disabled=false;btn.textContent='📄 重新產生 PDF'}
+}
+function downloadReadyPdf(){if(!readyPdfBlob)return alert('請先產生 PDF');const url=URL.createObjectURL(readyPdfBlob);const a=document.createElement('a');a.href=url;a.download=readyPdfName;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+async function shareReadyPdf(){if(!readyPdfBlob)return alert('請先產生 PDF');try{const f=new File([readyPdfBlob],readyPdfName,{type:'application/pdf'});if(navigator.canShare?.({files:[f]})&&navigator.share){await navigator.share({files:[f],title:readyPdfName});return}downloadReadyPdf();pdfMsg('此瀏覽器不支援直接分享 PDF，已嘗試下載檔案；可由「檔案／下載項目」開啟。');}catch(e){if(e.name!=='AbortError'){console.warn('PDF 分享失敗',e);pdfMsg('分享未完成：'+e.message+'。請改按「儲存 PDF」。',true)}}}
+
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Service Worker 註冊失敗',e));
 </script>
 </body>
