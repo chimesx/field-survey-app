@@ -2,8 +2,8 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<title>Field Survey App v4.4.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Field Survey App v4.4.4</title>
 <meta name="theme-color" content="#20252b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="現勘調查">
@@ -189,7 +189,7 @@ html.ios-device.pwa-standalone{background:#000!important}
   .overlay .modal-footer{padding:7px 10px}
 }
 
-/* v4.4.3: final-PDF proof viewer; single-page canvas to limit iPhone memory. */
+/* v4.4.4: final-PDF proof viewer; single-page canvas to limit iPhone memory. */
 .pdf-proof-dialog{width:min(850px,98vw)!important;max-height:calc(100dvh - 12px)!important;display:flex;flex-direction:column;overflow:hidden}
 .pdf-proof-controls{display:flex;gap:12px;align-items:center;justify-content:center;flex:none;padding:8px;background:#f7f9fc;border-bottom:1px solid #dce3ec}
 .pdf-proof-controls .btn{min-height:36px;font-size:13px;padding:7px 12px}
@@ -241,12 +241,57 @@ input[type=file]{display:none}
  .editor-advanced .heading-row button{font-size:12px;padding:7px;min-height:36px}.editor-advanced .editor-preview{height:180px}.editor-footer .btn{font-size:13px;flex:1;padding:9px 6px}.editor-footer #save-next-btn{flex:1.2}
  .report-toolbar .btn{font-size:12px;min-height:39px}.report-toolbar #report-print{display:none}
 }
+
+/* v4.4.4: 可及性與裝置字體大小，不改 PDF 的字體與位置。 */
+:root{--field-ui-scale:1}
+#ui-header .btn,.mobile-tools-grid .btn,.modal:not(.pdf-proof-dialog) .btn{font-size:calc(14px * var(--field-ui-scale));line-height:1.35}
+#statusbar{font-size:calc(12px * var(--field-ui-scale));min-height:28px}
+.modal:not(.pdf-proof-dialog) .modal-header h2{font-size:calc(18px * var(--field-ui-scale))}
+.modal .field label{font-size:calc(13px * var(--field-ui-scale))}
+.modal .field input,.modal .field select,.modal .field textarea,.search-row input,.search-row select{font-size:max(16px,calc(14px * var(--field-ui-scale)))}
+.modal .field input,.modal .field select{min-height:44px}
+.photo-card .meta-title{font-size:calc(13px * var(--field-ui-scale))}
+.photo-card .meta-sub{font-size:calc(11px * var(--field-ui-scale));line-height:1.5}
+.photo-card .mini-delete,.photo-card .tag-pick{font-size:calc(12px * var(--field-ui-scale));min-height:36px}
+.filter-chip,.tag-pick,.quick-type{font-size:calc(12px * var(--field-ui-scale))}
+.camera-meta-item,.camera-shot-note,.camera-note{font-size:calc(12px * var(--field-ui-scale))}
+.editor-mobile-summary b{font-size:calc(14px * var(--field-ui-scale))}
+.editor-coord,.drawing-manager-help,.timeline-event-body,.mobile-tools-hint{font-size:calc(12px * var(--field-ui-scale));line-height:1.55}
+#ui-size-modal{z-index:6500}
+.ui-size-options{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.ui-size-options button{flex:1;min-width:76px;min-height:48px;border:2px solid #cbd5e1;border-radius:12px;background:#fff;color:#334155;font-weight:800;font-size:16px;cursor:pointer}
+.ui-size-options button[aria-pressed=true]{border-color:#0b74de;background:#e8f2ff;color:#0758a8}
+.ui-size-sample{padding:14px;border-radius:10px;background:#f1f5f9;display:flex;flex-direction:column;gap:8px;font-size:calc(14px * var(--field-ui-scale));line-height:1.5}
+.ui-size-hint{color:#64748b;font-size:12px;line-height:1.5}
+#editor-quick-thumbnail,.editor-preview{cursor:zoom-in}
+#editor-quick-thumbnail:focus-visible,.editor-preview:focus-visible{outline:3px solid #0b74de}
+.gps-quality-warning{display:block;margin-top:7px;color:#9a5800;background:#fff7e6;border:1px solid #f6d68f;padding:8px;border-radius:8px;font-weight:700;line-height:1.5}
+.gps-quality-good{display:block;margin-top:7px;color:#166534;background:#edfdf1;border:1px solid #a9deba;padding:8px;border-radius:8px;line-height:1.5}
+.photo-zoom-modal{display:none;position:fixed;inset:0;z-index:12500;background:#0b1019;color:#fff;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.photo-zoom-modal.open{display:flex}
+.photo-zoom-toolbar{display:flex;align-items:center;gap:7px;padding:8px 10px;flex:none;min-height:54px;flex-wrap:wrap;background:#1f2937}
+.photo-zoom-toolbar span:first-child{flex:1;min-width:90px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.photo-zoom-toolbar button{background:#334155;color:#fff;border:1px solid #475569;padding:9px;min-height:40px;min-width:40px;border-radius:8px;cursor:pointer;font-weight:800;font-size:17px}
+#photo-zoom-level{font-size:12px;min-width:45px;text-align:center}
+.photo-zoom-stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;user-select:none;overscroll-behavior:contain}
+.photo-zoom-stage img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.photo-zoom-help{padding:7px 12px;color:#d1d5db;font-size:12px;text-align:center;line-height:1.4;flex:none}
+@media(max-width:760px),(orientation:landscape) and (max-height:600px) and (pointer:coarse){
+  #ui-header .btn{font-size:clamp(13px,calc(14px * var(--field-ui-scale)),18px)}
+  #statusbar{font-size:clamp(11px,calc(12px * var(--field-ui-scale)),16px)}
+  #ui-header .header-row .btn{font-size:clamp(13px,calc(13px * var(--field-ui-scale)),17px)!important}
+  #photo-panel .panel-toolbar{padding:6px 8px}
+  .modal .field input,.modal .field select,.modal .field textarea{font-size:max(16px,calc(15px * var(--field-ui-scale)))}
+  .photo-zoom-toolbar{padding:6px;gap:4px}
+  .photo-zoom-toolbar button{padding:6px;min-height:40px;min-width:37px}
+  .photo-zoom-help{font-size:11px}
+}
 </style>
 </head>
 <body>
 <div id="ui-header" class="no-print">
   <div class="header-row">
-    <div class="brand">Field Survey App <small>v4.4.3</small></div>
+    <div class="brand">Field Survey App <small>v4.4.4</small></div>
     <button class="btn btn-gray mobile-secondary" onclick="openProjectModal()">📋 案件資料</button>
     <button class="btn btn-blue mobile-primary" onclick="openFieldCamera()">📷 現場拍照</button>
     <button id="continuous-btn" class="btn btn-orange mobile-secondary" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -301,7 +346,7 @@ input[type=file]{display:none}
  <div class="modal">
   <div class="modal-header"><h2>☰ 更多功能</h2><button class="btn btn-white" onclick="closeModal('mobile-tools-modal')">✕</button></div>
   <div class="modal-body">
-   <div style="font-size:12px;color:#64748b;font-weight:700;margin-bottom:10px">Field Survey App v4.4.3</div><div class="mobile-tools-section">現勘作業</div>
+   <div style="font-size:12px;color:#64748b;font-weight:700;margin-bottom:10px">Field Survey App v4.4.4</div><div class="mobile-tools-section">現勘作業</div>
    <div class="mobile-tools-grid">
     <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');openProjectModal()">📋 案件資料</button>
     <button id="mobile-continuous-btn" class="btn btn-orange" onclick="toggleContinuousMode()">🚶 連續模式：關</button>
@@ -312,7 +357,9 @@ input[type=file]{display:none}
     <button class="btn btn-green" onclick="closeModal('mobile-tools-modal');openReportSettings()">📄 產生報告</button>
     <button class="btn btn-blue" onclick="closeModal('mobile-tools-modal');installPWA()">⬇ 安裝 App</button>
    </div>
-   <div class="mobile-tools-section">專案檔案</div>
+    <div class="mobile-tools-section">介面設定</div>
+    <button class="btn btn-gray" type="button" onclick="closeModal('mobile-tools-modal');openUiSizeSettings()">🔠 字體與顯示大小</button>
+    <div class="mobile-tools-section">專案檔案</div>
    <div class="mobile-tools-grid">
     <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');exportAllPhotosZip()">📦 匯出全部照片 ZIP（含原檔）</button><button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');exportProject()">💾 匯出專案</button>
     <button class="btn btn-gray" onclick="closeModal('mobile-tools-modal');document.getElementById('project-input').click()">📂 載入專案</button>
@@ -320,6 +367,24 @@ input[type=file]{display:none}
    <div class="mobile-tools-hint">手機首頁只保留「現場拍照、匯入照片、更多」三個主要入口，避免工具列佔用地圖畫面。</div>
   </div>
  </div>
+</div>
+
+<!-- v4.4.4 介面大小：不寫進專案，避免跨裝置不合適 -->
+<div id="ui-size-modal" class="overlay no-print" role="dialog" aria-modal="true" aria-label="介面顯示大小">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header"><h2>🔠 字體與顯示大小</h2><button type="button" class="btn btn-white" onclick="closeModal('ui-size-modal')">✕</button></div>
+    <div class="modal-body">
+      <p style="font-size:14px;color:#475569">調整文字、按鈕及輸入欄大小，地圖仍可用雙指獨立縮放。</p>
+      <div class="ui-size-options" role="group" aria-label="選擇字體大小">
+        <button type="button" data-size="standard" onclick="setFieldUiSize('standard')">標準</button>
+        <button type="button" data-size="large" onclick="setFieldUiSize('large')">大字</button>
+        <button type="button" data-size="xl" onclick="setFieldUiSize('xl')">特大</button>
+      </div>
+      <div class="ui-size-sample"><b>照片 NO.01｜現勘紀錄</b><div>東側廠區排水溝、照片 GPS 精度 ±8 m。</div></div>
+      <p class="ui-size-hint">設定只保存在此手機／瀏覽器；若手機橫式顯示空間不足，可暫時切回「標準」。</p>
+    </div>
+    <div class="modal-footer"><button class="btn btn-blue" type="button" onclick="closeModal('ui-size-modal')">完成</button></div>
+  </div>
 </div>
 
 <!-- 案件資料 -->
@@ -336,8 +401,8 @@ input[type=file]{display:none}
     <div class="field"><label>天候</label><select id="p-weather"><option value="">未填</option><option>晴</option><option>多雲</option><option>陰</option><option>雨</option><option>豪雨</option><option>其他</option></select></div>
     <div class="field full"><label>現勘目的 / 說明</label><textarea id="p-purpose"></textarea></div>
    </div>
-   <div class="danger-zone">
-    <b>📷 影像保存模式</b>
+    <div class="danger-zone"><b>🔠 介面顯示大小</b><div class="mobile-tools-hint">現場可選「標準／大字／特大」，設定僅影響此裝置，不會更動專案照片或報告文字。</div><button type="button" class="btn btn-blue" onclick="openUiSizeSettings()">調整顯示大小</button></div>
+    <div class="danger-zone"><b>📷 影像保存模式</b>
     <label class="check-row" style="margin-top:8px"><input type="checkbox" id="p-preserve-original" onchange="toggleOriginalMode(this.checked)"><span><b>保留原始影像（新照片）</b><br><span style="font-size:12px;color:#64748b">匯入照片或使用手機原生相機時，保留瀏覽器取得的完整原始檔（HEIC/JPG 等）；系統內即時相機會優先嘗試拍攝原生高畫質影像，若裝置不支援，只能保存未縮小的取景影像，不能視為相機原檔。</span></span></label>
     <div id="original-mode-status" style="font-size:12px;color:#475569;margin:8px 0">原始檔保存在此裝置網站的 IndexedDB。既有壓縮照片無法還原為原始檔。</div>
     <div style="font-size:12px;color:#92400e">⚠ 原始檔可能佔用大量手機空間。請定期使用「全部照片 ZIP（含原檔）」備份；單獨 JSON 備份不包含二進位原始檔。</div>
@@ -391,7 +456,7 @@ input[type=file]{display:none}
  <div class="modal large photo-edit-dialog">
   <div class="modal-header"><h2 id="photo-editor-title">照片紀錄</h2><button class="btn btn-white" onclick="closePhotoEditor()">✕</button></div>
   <div class="modal-body">
-   <div class="editor-mobile-summary"><img id="editor-quick-thumbnail" alt="照片縮圖"><div><b id="editor-quick-title">現勘快速紀錄</b><div id="editor-quick-meta">時間與定位</div></div></div>
+   <div class="editor-mobile-summary"><img id="editor-quick-thumbnail" alt="點一下放大照片" role="button" tabindex="0" onclick="openPhotoZoom()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoZoom()}"><div><b id="editor-quick-title">現勘快速紀錄</b><div id="editor-quick-meta">時間與定位</div></div></div>
    <div class="editor-tabs"><button type="button" class="editor-tab active" data-tab="record" onclick="showEditorTab('record')">📝 現勘紀錄</button><button type="button" class="editor-tab" data-tab="location" onclick="showEditorTab('location')">🧭 定位／方位</button><button type="button" class="editor-tab" data-tab="photo" onclick="showEditorTab('photo')">🖼️ 照片／原檔</button></div>
    <section id="editor-record-panel" class="editor-tab-panel active">
     <div class="form-grid editor-record-grid">
@@ -408,7 +473,7 @@ input[type=file]{display:none}
    </section>
    <details id="editor-advanced" class="editor-advanced"><summary>⚙️ 進階資料：定位、方位校正、照片與來源檔</summary>
     <section id="editor-location-panel" class="editor-tab-panel">
-     <div id="editor-coord" class="editor-coord"></div>
+     <div id="editor-coord" class="editor-coord"></div><div id="editor-gps-quality" class="gps-quality-warning">GPS 資料品質待確認</div>
      <button class="btn btn-orange" type="button" onclick="startManualLocateFromEditor()">📍 手動指定照片位置</button>
      <div class="heading-panel">
       <div class="heading-row"><b>🧭 拍攝方位</b><span id="heading-cardinal" class="heading-chip">未知</span><span id="heading-confidence" class="heading-confidence low">需確認</span></div>
@@ -418,8 +483,8 @@ input[type=file]{display:none}
      </div>
     </section>
     <section id="editor-photo-panel" class="editor-tab-panel">
-     <div class="editor-preview"><img id="editor-img" alt="照片原圖預覽"></div>
-     <div class="mini-actions"><button class="btn btn-gray" onclick="rotatePhoto(-90)">↶ 左轉</button><button class="btn btn-gray" onclick="rotatePhoto(90)">↷ 右轉</button><button class="btn btn-gray" onclick="movePhoto(-1)">↑ 前移</button><button class="btn btn-gray" onclick="movePhoto(1)">↓ 後移</button><button class="btn btn-green" type="button" onclick="shareCurrentPhoto()">📤 分享／存入相簿</button><button class="btn btn-blue" type="button" onclick="downloadCurrentPhoto()">⬇ 下載 JPG</button><button class="btn btn-gray" type="button" onclick="downloadCurrentOriginal()">📁 取出原始／來源檔</button></div>
+     <div class="editor-preview" role="button" tabindex="0" aria-label="放大檢視照片" onclick="openPhotoZoom()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoZoom()}"><img id="editor-img" alt="點一下放大照片"></div>
+     <div class="mini-actions"><button type="button" class="btn btn-blue" onclick="openPhotoZoom()">🔍 放大檢視</button><button class="btn btn-gray" onclick="rotatePhoto(-90)">↶ 左轉</button><button class="btn btn-gray" onclick="rotatePhoto(90)">↷ 右轉</button><button class="btn btn-gray" onclick="movePhoto(-1)">↑ 前移</button><button class="btn btn-gray" onclick="movePhoto(1)">↓ 後移</button><button class="btn btn-green" type="button" onclick="shareCurrentPhoto()">📤 分享／存入相簿</button><button class="btn btn-blue" type="button" onclick="downloadCurrentPhoto()">⬇ 下載 JPG</button><button class="btn btn-gray" type="button" onclick="downloadCurrentOriginal()">📁 取出原始／來源檔</button></div>
      <div class="album-confirm-strip"><label class="check-row"><input id="e-album-confirmed" type="checkbox" onchange="confirmAlbumSaved(this.checked)"><span>我已在手機相簿確認可看到這張照片</span></label><div id="e-album-status" class="album-caption">請以相簿實際看到照片為準。</div></div>
      <div id="original-photo-status" style="font-size:12px;line-height:1.5;color:#64748b;margin-top:8px">來源檔保存狀態</div>
      <div class="danger-zone"><button class="btn btn-red" onclick="deleteCurrentPhoto()">🗑 刪除這張照片</button></div>
@@ -428,6 +493,22 @@ input[type=file]{display:none}
   </div>
   <div class="modal-footer editor-footer"><button class="btn btn-white" type="button" onclick="closePhotoEditor()">取消</button><button id="save-next-btn" class="btn btn-gray" onclick="savePhotoAndNext()">儲存並下一張 →</button><button class="btn btn-blue" onclick="savePhotoEditor()">✓ 儲存紀錄</button></div>
  </div>
+</div>
+
+<!-- v4.4.4 影像檢視器：雙指縮放、拖曳、雙擊、滑鼠滾輪，優先讀取保存的來源檔 -->
+<div id="photo-zoom-modal" class="photo-zoom-modal no-print" role="dialog" aria-modal="true" aria-label="照片放大檢視" aria-hidden="true">
+  <div class="photo-zoom-toolbar">
+    <span id="photo-zoom-title">照片放大檢視</span>
+    <button type="button" onclick="zoomPhotoBy(-1)" aria-label="縮小">−</button>
+    <span id="photo-zoom-level">100%</span>
+    <button type="button" onclick="zoomPhotoBy(1)" aria-label="放大">＋</button>
+    <button type="button" onclick="resetPhotoZoom()">還原</button>
+    <button type="button" onclick="closePhotoZoom()" aria-label="關閉照片檢視器">✕</button>
+  </div>
+  <div id="photo-zoom-stage" class="photo-zoom-stage" aria-label="雙指可放大縮小，放大後可拖曳">
+    <img id="photo-zoom-img" alt="照片高解析度檢視" draggable="false">
+  </div>
+  <div id="photo-zoom-help" class="photo-zoom-help">雙指縮放／雙擊放大・放大後拖曳查看・優先使用已保存的原始／來源影像</div>
 </div>
 
 <!-- 現勘紀錄時間軸（按真實拍攝時間排序，不等同連續 GPS 軌跡） -->
@@ -527,7 +608,27 @@ input[type=file]{display:none}
 <script defer src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
 <script>
-const APP_VERSION='4.4.3';
+const APP_VERSION='4.4.4';
+const FIELD_UI_KEY='fieldSurvey.uiSize.v1';
+const FIELD_UI_SCALES={standard:1,large:1.16,xl:1.32};
+let fieldUiSize='standard';
+function setFieldUiSize(size){
+  fieldUiSize=Object.hasOwn(FIELD_UI_SCALES,size)?size:'standard';
+  document.documentElement.style.setProperty('--field-ui-scale',FIELD_UI_SCALES[fieldUiSize]);
+  document.querySelectorAll('.ui-size-options button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.size===fieldUiSize)));
+  try{localStorage.setItem(FIELD_UI_KEY,fieldUiSize)}catch(e){console.warn('無法保存介面字級偏好',e)}
+  if(typeof map!=='undefined')requestAnimationFrame(()=>map.invalidateSize());
+}
+function openUiSizeSettings(){
+  document.getElementById('ui-size-modal').style.display='flex';
+  document.querySelectorAll('.ui-size-options button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.size===fieldUiSize)));
+}
+function restoreFieldUiSize(){
+  let saved=window.matchMedia('(max-width:760px), (orientation:landscape) and (max-height:600px) and (pointer:coarse)').matches?'large':'standard';
+  try{saved=localStorage.getItem(FIELD_UI_KEY)||saved}catch(_){}
+  setFieldUiSize(saved);
+}
+
 let deferredInstallPrompt=null;
 const TYPES=['未分類','土壤','地下水','廢棄物','排水','設備','建物','油槽','道路','其他'];
 const QUICK_TAGS=['油污','異味','積水','廢棄物','滲漏','鏽蝕','破損','植被異常','採樣點','地下水井'];
@@ -590,7 +691,7 @@ map.addControl(drawControl);
 map.on(L.Draw.Event.CREATED,e=>{const layer=e.layer;const gj=layer.toGeoJSON();const label=prompt('圖徵名稱（可略過）','')||'';gj.properties={...(gj.properties||{}),id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8),label,createdAt:new Date().toISOString()};layer._fieldId=gj.properties.id;layer.feature=gj;drawnLayerGroup.addLayer(layer);drawnFeatures.push(gj);bindDrawingPopup(layer,gj);scheduleSave();renderDrawingManagerIfOpen();});
 map.on(L.Draw.Event.EDITED,()=>syncDrawnFeaturesFromMap());
 map.on(L.Draw.Event.DELETED,()=>syncDrawnFeaturesFromMap());
-map.on('click',e=>{if(manualLocateIndex!==null){const d=photosData[manualLocateIndex];d.lat=e.latlng.lat;d.lng=e.latlng.lng;d.hasGps=true;manualLocateIndex=null;document.getElementById('pending-banner').style.display='none';scheduleSave();render();map.flyTo([d.lat,d.lng],20);setTimeout(()=>openPhotoEditor(photosData.indexOf(d)),350)}});
+map.on('click',e=>{if(manualLocateIndex!==null){const d=photosData[manualLocateIndex];preserveGpsCorrection(d,e.latlng.lat,e.latlng.lng,'手動地圖定位');manualLocateIndex=null;document.getElementById('pending-banner').style.display='none';scheduleSave();render();map.flyTo([d.lat,d.lng],20);setTimeout(()=>openPhotoEditor(photosData.indexOf(d)),350)}});
 
 function esc(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function uid(){return 'p_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
@@ -650,7 +751,40 @@ function orientationToHeading(ev){if(Number.isFinite(ev.webkitCompassHeading))re
 function circularMean(values){const a=values.map(normHeading).filter(v=>v!==null);if(!a.length)return null;let sx=0,sy=0;for(const d of a){const r=d*Math.PI/180;sx+=Math.sin(r);sy+=Math.cos(r)}return normHeading(Math.atan2(sx/a.length,sy/a.length)*180/Math.PI)}
 function stableLiveHeading(){const now=Date.now();const recent=headingSamples.filter(x=>now-x.t<=1600).slice(-18).map(x=>x.h);return circularMean(recent)??normHeading(liveHeading)}
 function headingToCardinal(h){const n=normHeading(h);return n===null?'未知':`${n.toFixed(0)}° ${headingCardinal(n)}`}
-function startGeoWatch(){stopGeoWatch();bestCameraGeo=null;if(!navigator.geolocation)return;geoWatchId=navigator.geolocation.watchPosition(p=>{const g={lat:p.coords.latitude,lng:p.coords.longitude,accuracy:p.coords.accuracy,timestamp:p.timestamp||Date.now()};lastCameraGeo=g;if(!bestCameraGeo||!Number.isFinite(bestCameraGeo.accuracy)||g.accuracy<bestCameraGeo.accuracy)bestCameraGeo=g;const el=document.getElementById('camera-gps'),de=document.getElementById('camera-gps-detail');if(el)el.textContent=`📍 ±${Math.round((bestCameraGeo||g).accuracy||0)}m`;if(de)de.textContent=`${g.lat.toFixed(6)}, ${g.lng.toFixed(6)}｜最佳 ±${Math.round((bestCameraGeo||g).accuracy||0)}m`;},()=>{const de=document.getElementById('camera-gps-detail');if(de)de.textContent='無法持續取得 GPS';},{enableHighAccuracy:true,maximumAge:1000,timeout:12000})}
+// v4.4.4：快門前 5 秒內的定位才可使用，優先最新（非過去 60 秒精度最佳）。
+const CAPTURE_GPS_MAX_AGE_MS=5000;
+const CAPTURE_GPS_GOOD_AGE_MS=3000;
+const CAPTURE_GPS_WARNING_METERS=10;
+function selectCaptureGeo(shotMs, latest, best){
+  const candidates=[latest,best].filter(g=>g&&Number.isFinite(g.lat)&&Number.isFinite(g.lng)&&Number.isFinite(g.timestamp))
+    .map(g=>({...g,ageMs:shotMs-g.timestamp}))
+    .filter(g=>g.ageMs>=-1500&&g.ageMs<=CAPTURE_GPS_MAX_AGE_MS)
+    .sort((a,b)=>a.ageMs-b.ageMs);
+  // 時間優先：最近一筆優先。若兩筆幾乎同時才採精度較佳者。
+  let chosen=candidates[0]||null;
+  if(chosen){for(const g of candidates.slice(1)){if(Math.abs(g.ageMs-chosen.ageMs)<=800&&Number.isFinite(g.accuracy)&&(!Number.isFinite(chosen.accuracy)||g.accuracy<chosen.accuracy))chosen=g;}}
+  if(!chosen)return {geo:null,review:true,reason:'拍照前 5 秒內沒有有效 GPS；請稍後重新定位或手動標記'};
+  const reasons=[];
+  if(chosen.ageMs>CAPTURE_GPS_GOOD_AGE_MS)reasons.push(`定位資料距拍攝約 ${(chosen.ageMs/1000).toFixed(1)} 秒`);
+  if(!Number.isFinite(chosen.accuracy))reasons.push('GPS 未提供精度估計');
+  else if(chosen.accuracy>CAPTURE_GPS_WARNING_METERS)reasons.push(`GPS 精度約 ±${Math.round(chosen.accuracy)} m`);
+  return {geo:chosen,review:reasons.length>0,reason:reasons.join('；')||'定位時效與精度符合預設門檻'};
+}
+function formatGpsQuality(d){
+  if(!d.hasGps)return '⚠ 尚無可用定位；請手動指定照片位置';
+  if(d.gpsCorrection?.method==='手動地圖定位')return '📍 已由人工指定位置（非 GPS 精度測量）';
+  if(d.gpsNeedsReview)return '⚠ 定位需確認：'+(d.gpsQualityReason||'精度或時效不足');
+  if(d.captureMeta?.gpsAgeMs!==undefined&&d.captureMeta.gpsAgeMs!==null)return `✓ GPS 距拍攝約 ${(d.captureMeta.gpsAgeMs/1000).toFixed(1)} 秒${Number.isFinite(d.captureAccuracy)?`，精度 ±${Math.round(d.captureAccuracy)} m`:''}`;
+  return '📍 位置來自照片／匯入紀錄；精度請依原始來源判讀';
+}
+function preserveGpsCorrection(d,lat,lng,method){
+  const previous={lat:d.lat,lng:d.lng,hasGps:!!d.hasGps,accuracy:d.captureAccuracy??null};
+  if(!d.capturedGps&&d.hasGps)d.capturedGps=previous;
+  d.gpsCorrection={previous,lat,lng,method,correctedAt:new Date().toISOString()};
+  d.lat=lat;d.lng=lng;d.hasGps=true;d.gpsNeedsReview=false;
+  d.gpsQualityReason='已由人工調整座標';
+}
+function startGeoWatch(){stopGeoWatch();bestCameraGeo=null;if(!navigator.geolocation)return;geoWatchId=navigator.geolocation.watchPosition(p=>{const g={lat:p.coords.latitude,lng:p.coords.longitude,accuracy:p.coords.accuracy,timestamp:p.timestamp||Date.now()};lastCameraGeo=g;if(!bestCameraGeo||!Number.isFinite(bestCameraGeo.accuracy)||g.accuracy<bestCameraGeo.accuracy)bestCameraGeo=g;const el=document.getElementById('camera-gps'),de=document.getElementById('camera-gps-detail');if(el)el.textContent=`📍 最新 ±${Math.round(g.accuracy||0)}m${g.accuracy>CAPTURE_GPS_WARNING_METERS?' ⚠':''}`;if(de)de.textContent=`${g.lat.toFixed(6)}, ${g.lng.toFixed(6)}｜最新 ±${Math.round(g.accuracy||0)}m（${Math.max(0,(Date.now()-g.timestamp)/1000).toFixed(1)}秒前）${g.accuracy>CAPTURE_GPS_WARNING_METERS?'｜請確認定位':''}`;},()=>{const de=document.getElementById('camera-gps-detail');if(de)de.textContent='無法持續取得 GPS';},{enableHighAccuracy:true,maximumAge:1000,timeout:12000})}
 function stopGeoWatch(){if(geoWatchId!==null&&navigator.geolocation){navigator.geolocation.clearWatch(geoWatchId);geoWatchId=null}}
 async function enableOrientationSensor(){try{if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){const r=await DeviceOrientationEvent.requestPermission();if(r!=='granted')return false}if(orientationHandler)window.removeEventListener('deviceorientation',orientationHandler,true);headingSamples=[];orientationHandler=ev=>{const h=orientationToHeading(ev);if(h!==null){liveHeading=h;headingSamples.push({h,t:Date.now()});if(headingSamples.length>40)headingSamples.shift();const stable=stableLiveHeading();const el=document.getElementById('camera-heading'),de=document.getElementById('camera-heading-detail');if(el)el.textContent=`🧭 ${headingToCardinal(stable)}`;if(de)de.textContent=`即時 ${headingToCardinal(h)}｜穩定 ${headingToCardinal(stable)}`}};window.addEventListener('deviceorientation',orientationHandler,true);return true}catch(e){console.warn('方位感測器權限失敗',e);return false}}
 async function openFieldCamera(){liveHeading=null;lastCameraGeo=null;bestCameraGeo=null;headingSamples=[];document.getElementById('camera-gps').textContent='📍 GPS 取得中';document.getElementById('camera-heading').textContent='🧭 方位取得中';document.getElementById('camera-gps-detail').textContent='等待高精度定位';document.getElementById('camera-heading-detail').textContent='等待感測器';document.getElementById('camera-shot-note').style.display='none';document.getElementById('camera-modal').style.display='flex';startGeoWatch();await enableOrientationSensor();try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('getUserMedia unavailable');cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});document.getElementById('camera-video').srcObject=cameraStream}catch(e){console.warn('即時相機不可用，改用原生相機',e);closeFieldCamera();useNativeCameraFallback()}}
@@ -669,8 +803,8 @@ async function captureFieldPhoto(mode='edit'){
  btns.forEach(b=>b.disabled=true);
  const shotTime=new Date();
  // 快門觸發時先確定影像及感測器快照；不等待 GPS、寫入資料庫或壓縮。
- const geoCandidates=[lastCameraGeo,bestCameraGeo].filter(g=>g&&Number.isFinite(g.lat)&&Number.isFinite(g.lng)&&Date.now()-(g.timestamp||0)<60000);
- const geo=geoCandidates.sort((a,b)=>(a.accuracy||9999)-(b.accuracy||9999))[0]||null;
+ const captureGps=selectCaptureGeo(shotTime.getTime(),lastCameraGeo,bestCameraGeo);
+  const geo=captureGps.geo;
  const heading=stableLiveHeading();
  const quality=document.getElementById('camera-quality-mode')?.value||'fast';
  const name=`FIELD_${shotTime.toISOString().replace(/[:.]/g,'-')}.jpg`;
@@ -695,12 +829,12 @@ async function captureFieldPhoto(mode='edit'){
    dataUrl=await new Promise((resolve,reject)=>small.toBlob(async b=>{if(!b)return reject(new Error('影像壓縮失敗'));resolve(await blobToDataURL(b))},'image/jpeg',.88));
   }
   const d=await makeCapturedRecord(dataUrl,name,geo,heading,'現場即時感測（穩定方位）');
-  d.time=shotTime;d.captureMeta={...d.captureMeta,capturedAt:shotTime.toISOString(),gpsAgeMs:geo?Math.max(0,shotTime.getTime()-(geo.timestamp||0)):null,captureQuality:quality};
+  d.time=shotTime;d.gpsNeedsReview=captureGps.review;d.gpsQualityReason=captureGps.reason;d.gpsSource='快門時附近定位';d.capturedGps=geo?{lat:geo.lat,lng:geo.lng,accuracy:geo.accuracy??null,timestamp:geo.timestamp}:null;d.captureMeta={...d.captureMeta,capturedAt:shotTime.toISOString(),gpsAgeMs:geo?Math.max(0,shotTime.getTime()-(geo.timestamp||0)):null,captureQuality:quality,gpsQuality:captureGps.review?'review':'good'};
   if(continuousMode&&cameraPresetType&&cameraPresetType!=='未分類')d.type=cameraPresetType;
   photosData.push(d);lastCapturedPhotoId=d.id;
   scheduleSave();render();
   const albumRow=document.getElementById('camera-album-row');if(albumRow)albumRow.classList.toggle('hidden',!galleryReminder);
-  cameraShotNotice(`✓ 第 ${photosData.length} 張已完成｜${geo?'GPS ±'+Math.round(geo.accuracy||0)+'m':'待定位'}｜儲存${preserveOriginals&&originalBlob?'原始／來源影像中…':'中…'}`);
+  cameraShotNotice(`✓ 第 ${photosData.length} 張已完成｜${!geo?'⚠ 待定位':captureGps.review?'⚠ GPS需確認':'GPS ±'+Math.round(geo.accuracy||0)+'m'}｜儲存${preserveOriginals&&originalBlob?'原始／來源影像中…':'中…'}`);
   if(originalBlob&&preserveOriginals){await saveOriginal(d,originalBlob,name,sourceLabel);scheduleSave()}
   // 報告影像及來源影像落入 IndexedDB 才解除連拍鎖定。
   await saveState();
@@ -711,7 +845,7 @@ async function captureFieldPhoto(mode='edit'){
  }catch(e){console.error('拍攝處理失敗',e);cameraShotNotice(`⚠ 拍攝失敗：${e.message}`,true)}
  finally{cameraShotBusy=false;btns.forEach(b=>b.disabled=false)}
 }
-document.getElementById('capture-input').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const geo=await geoOnce({enableHighAccuracy:true,timeout:5000,maximumAge:1000})||lastCameraGeo;let exif={};try{exif=await exifr.parse(file,{gps:true,tiff:true,exif:true})||{}}catch(_){}const url=await compressImage(file);const exifGps=Number.isFinite(exif.latitude)&&Number.isFinite(exif.longitude)?{lat:exif.latitude,lng:exif.longitude,accuracy:null,timestamp:null}:null;const useGeo=exifGps||geo;const sensorH=stableLiveHeading();const h=sensorH??normHeading(exif.GPSImgDirection);const d=await makeCapturedRecord(url,file.name||`FIELD_${Date.now()}.jpg`,useGeo,h,sensorH!==null?'現場感測器（原生相機）':'手機相機 EXIF');d.exifHeading=normHeading(exif.GPSImgDirection);d.headingRef=exif.GPSImgDirectionRef||'';d.exifOrientation=exif.Orientation??null;d.deviceMake=exif.Make||d.deviceMake;d.deviceModel=exif.Model||d.deviceModel;d.deviceSoftware=exif.Software||d.deviceSoftware;if(sensorH===null&&d.exifHeading!==null){d.headingMode='auto';applyAutoCalibration(d)}await saveOriginal(d,file,file.name||d.name,'手機原生相機回傳檔案');photosData.push(d);scheduleSave();render();openPhotoEditor(photosData.length-1)}catch(err){console.error(err);alert('拍照匯入失敗：'+err.message)}e.target.value=''});
+document.getElementById('capture-input').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const returnGeo=await geoOnce({enableHighAccuracy:true,timeout:5000,maximumAge:1000});const geo=returnGeo||(lastCameraGeo&&Date.now()-lastCameraGeo.timestamp<=CAPTURE_GPS_MAX_AGE_MS?lastCameraGeo:null);let exif={};try{exif=await exifr.parse(file,{gps:true,tiff:true,exif:true})||{}}catch(_){}const url=await compressImage(file);const exifGps=Number.isFinite(exif.latitude)&&Number.isFinite(exif.longitude)?{lat:exif.latitude,lng:exif.longitude,accuracy:null,timestamp:null}:null;const useGeo=exifGps||geo;const sensorH=stableLiveHeading();const h=sensorH??normHeading(exif.GPSImgDirection);const d=await makeCapturedRecord(url,file.name||`FIELD_${Date.now()}.jpg`,useGeo,h,sensorH!==null?'現場感測器（原生相機）':'手機相機 EXIF');d.gpsSource=exifGps?'相機 EXIF':'原生相機返回後定位（非快門時）';d.gpsNeedsReview=!exifGps;d.gpsQualityReason=exifGps?'EXIF 原始坐標；手機通常未提供水平精度':'未取得原生照片 GPS，使用返回系統後的定位；拍攝位置可能不同，需人工確認';d.capturedGps=useGeo?{lat:useGeo.lat,lng:useGeo.lng,accuracy:useGeo.accuracy??null,timestamp:useGeo.timestamp??null}:null;d.exifHeading=normHeading(exif.GPSImgDirection);d.headingRef=exif.GPSImgDirectionRef||'';d.exifOrientation=exif.Orientation??null;d.deviceMake=exif.Make||d.deviceMake;d.deviceModel=exif.Model||d.deviceModel;d.deviceSoftware=exif.Software||d.deviceSoftware;if(sensorH===null&&d.exifHeading!==null){d.headingMode='auto';applyAutoCalibration(d)}await saveOriginal(d,file,file.name||d.name,'手機原生相機回傳檔案');photosData.push(d);scheduleSave();render();openPhotoEditor(photosData.length-1)}catch(err){console.error(err);alert('拍照匯入失敗：'+err.message)}e.target.value=''});
 function getSpeechRecognition(){return window.SpeechRecognition||window.webkitSpeechRecognition||null}
 function stopVoiceNote(){if(speechRecognition){try{speechRecognition.stop()}catch(_){}}}
 function toggleVoiceNote(){if(speechListening){stopVoiceNote();return}const SR=getSpeechRecognition();if(!SR){alert('此瀏覽器目前不支援網頁語音辨識。iPhone 可改用鍵盤上的麥克風聽寫；Android 建議使用 Chrome。');return}const status=document.getElementById('voice-status'),btn=document.getElementById('voice-btn');speechRecognition=new SR();speechRecognition.lang='zh-TW';speechRecognition.continuous=true;speechRecognition.interimResults=true;let finalText='';speechRecognition.onstart=()=>{speechListening=true;btn.textContent='⏹ 停止語音';status.textContent='● 正在聆聽…';status.classList.add('listening')};speechRecognition.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const text=e.results[i][0].transcript;if(e.results[i].isFinal)finalText+=text;else interim+=text}status.textContent='● '+(interim||'正在聆聽…');if(finalText){const ta=document.getElementById('e-note');const prefix=ta.value.trim()?ta.value.trim()+'\n':'';ta.value=prefix+finalText.trim();finalText=''}};speechRecognition.onerror=e=>{console.warn('speech',e);status.textContent='語音辨識中斷：'+e.error};speechRecognition.onend=()=>{speechListening=false;btn.textContent='🎙️ 語音轉文字';status.textContent='語音紀錄已停止';status.classList.remove('listening')};try{speechRecognition.start()}catch(e){alert('無法啟動語音辨識：'+e.message)}}
@@ -725,8 +859,8 @@ function deleteVoiceAudio(){if(currentPhotoIndex===null)return;const d=photosDat
 
 document.getElementById('project-input').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.name.toLowerCase().endsWith('.zip')){await importProjectZip(f);e.target.value='';return}const obj=JSON.parse(await f.text());if(!Array.isArray(obj.photosData))throw new Error('格式不正確');project=obj.project||project;headingProfiles=obj.headingProfiles||headingProfiles||{};drawnFeatures=obj.drawnFeatures||[];offlineRegions=obj.offlineRegions||[];continuousMode=!!obj.continuousMode;cameraPresetType=obj.cameraPresetType||'未分類';preserveOriginals=obj.preserveOriginals!==false;galleryReminder=obj.galleryReminder!==false;backupInfo=obj.backupInfo||{zipExportRequestedAt:null};photosData=obj.photosData.map(d=>hydrateHeadingData({...d,originalStored:false,time:normalizeDate(d.time),tags:d.tags||[],include:d.include!==false,rotation:d.rotation||0,status:d.status||'normal',hasGps:Number.isFinite(d.lat)&&Number.isFinite(d.lng)}));fillProjectForm();restoreDrawnFeatures();updateContinuousButton();renderCameraPreset();scheduleSave();render();alert('專案載入完成')}catch(err){alert('載入失敗：'+err.message)}e.target.value=''})
 
-function render(){clusters.clearLayers();photosData.forEach((d,i)=>{if(!d.hasGps||!Number.isFinite(d.lat)||!Number.isFinite(d.lng))return;const n=i+1;const css=d.status==='abnormal'?'':'normal';const h=normHeading(d.heading);const markerHtml=h===null?`<div class="marker-container"><div class="number-marker ${css}">${n}</div></div>`:`<div class="marker-container" style="transform:rotate(${h}deg)"><div class="heading-pointer"></div><div class="number-marker ${css}" style="transform:rotate(${-h}deg)">${n}</div></div>`;const marker=L.marker([d.lat,d.lng],{index:n,draggable:true,icon:L.divIcon({className:'',html:markerHtml,iconSize:[34,34],iconAnchor:[17,17]})});marker.on('dragend',ev=>{const p=ev.target.getLatLng();d.lat=p.lat;d.lng=p.lng;d.hasGps=true;scheduleSave();render()});const label=d.point?esc(d.point):`NO.${n}`;marker.bindPopup(`<div class="popup-box"><strong>${label}</strong>${d.status==='abnormal'?' <span style="color:#b42318">⚠ 異常</span>':''}<img src="${d.url}" class="popup-img" style="transform:rotate(${d.rotation||0}deg)"><div class="popup-note">${esc(d.condition||d.note||'(無備註)')}</div><button class="popup-btn" onclick="openPhotoEditor(${i})">編輯紀錄</button></div>`);clusters.addLayer(marker)});renderPhotoList();updateStatus();if(document.getElementById('timeline-map-path')?.checked)updateTimelinePath();if(document.getElementById('timeline-modal')?.style.display==='flex')renderTimeline();if(photosData.length===1&&photosData[0].hasGps)map.setView([photosData[0].lat,photosData[0].lng],20)}
-function renderPhotoList(){const list=document.getElementById('photo-list');const q=(document.getElementById('search-input').value||'').trim().toLowerCase();const tf=document.getElementById('type-filter').value;let shown=0;list.innerHTML='';photosData.forEach((d,i)=>{const text=[i+1,d.point,d.type,d.area,d.condition,d.action,d.note,...(d.tags||[])].join(' ').toLowerCase();if(q&&!text.includes(q))return;if(tf&&d.type!==tf)return;if(quickFilter==='abnormal'&&d.status!=='abnormal')return;if(quickFilter==='pending'&&d.hasGps)return;if(quickFilter==='excluded'&&d.include!==false)return;shown++;const card=document.createElement('div');card.className='photo-card'+(!d.hasGps?' pending':'')+(currentPhotoIndex===i?' selected':'')+(d.include===false?' include-off':'');card.onclick=()=>selectPhoto(i);card.innerHTML=`<div class="thumb-wrap"><img class="list-thumb" src="${d.url}" style="transform:rotate(${d.rotation||0}deg)"><span class="thumb-badge">${i+1}</span></div><div class="photo-meta"><div class="meta-title"><span>${esc(d.point||('NO.'+(i+1)))}</span><span>${d.status==='abnormal'?'⚠':''}</span></div><div class="meta-sub">${esc(d.type||'未分類')} · ${d.hasGps?fmtDateTime(d.time):'📍 待定位'}</div><div class="meta-sub">🧭 ${esc(headingText(d))} · ${esc(confidenceMeta(d).text)}</div><div class="meta-sub">${esc(d.condition||d.note||d.name||'')}</div><div class="meta-tags">${!d.hasGps?'<span class="tag warn">待定位</span>':''}${d.include===false?'<span class="tag">不入報告</span>':''}${(d.tags||[]).slice(0,3).map(t=>`<span class="tag ${d.status==='abnormal'?'danger':''}">${esc(t)}</span>`).join('')}</div><div class="photo-card-actions"><button class="mini-delete" style="border-color:#bfdbfe;color:#0758a8" type="button" onclick="event.stopPropagation();openQuickClassify(${i},false)">⚡ 快分</button><button class="mini-delete" type="button" onclick="event.stopPropagation();deletePhoto(${i})">🗑 刪除</button></div></div>`;list.appendChild(card)});if(!shown)list.innerHTML='<div class="empty">沒有符合條件的照片</div>'}
+function render(){clusters.clearLayers();photosData.forEach((d,i)=>{if(!d.hasGps||!Number.isFinite(d.lat)||!Number.isFinite(d.lng))return;const n=i+1;const css=d.status==='abnormal'?'':'normal';const h=normHeading(d.heading);const markerHtml=h===null?`<div class="marker-container"><div class="number-marker ${css}">${n}</div></div>`:`<div class="marker-container" style="transform:rotate(${h}deg)"><div class="heading-pointer"></div><div class="number-marker ${css}" style="transform:rotate(${-h}deg)">${n}</div></div>`;const marker=L.marker([d.lat,d.lng],{index:n,draggable:true,icon:L.divIcon({className:'',html:markerHtml,iconSize:[34,34],iconAnchor:[17,17]})});marker.on('dragend',ev=>{const p=ev.target.getLatLng();preserveGpsCorrection(d,p.lat,p.lng,'手動地圖定位');scheduleSave();render()});const label=d.point?esc(d.point):`NO.${n}`;marker.bindPopup(`<div class="popup-box"><strong>${label}</strong>${d.status==='abnormal'?' <span style="color:#b42318">⚠ 異常</span>':''}<img src="${d.url}" class="popup-img" style="transform:rotate(${d.rotation||0}deg)"><div class="popup-note">${esc(d.condition||d.note||'(無備註)')}</div><button class="popup-btn" onclick="openPhotoEditor(${i})">編輯紀錄</button></div>`);clusters.addLayer(marker)});renderPhotoList();updateStatus();if(document.getElementById('timeline-map-path')?.checked)updateTimelinePath();if(document.getElementById('timeline-modal')?.style.display==='flex')renderTimeline();if(photosData.length===1&&photosData[0].hasGps)map.setView([photosData[0].lat,photosData[0].lng],20)}
+function renderPhotoList(){const list=document.getElementById('photo-list');const q=(document.getElementById('search-input').value||'').trim().toLowerCase();const tf=document.getElementById('type-filter').value;let shown=0;list.innerHTML='';photosData.forEach((d,i)=>{const text=[i+1,d.point,d.type,d.area,d.condition,d.action,d.note,...(d.tags||[])].join(' ').toLowerCase();if(q&&!text.includes(q))return;if(tf&&d.type!==tf)return;if(quickFilter==='abnormal'&&d.status!=='abnormal')return;if(quickFilter==='pending'&&d.hasGps)return;if(quickFilter==='excluded'&&d.include!==false)return;shown++;const card=document.createElement('div');card.className='photo-card'+(!d.hasGps?' pending':'')+(currentPhotoIndex===i?' selected':'')+(d.include===false?' include-off':'');card.onclick=()=>selectPhoto(i);card.innerHTML=`<div class="thumb-wrap"><img class="list-thumb" src="${d.url}" style="transform:rotate(${d.rotation||0}deg)"><span class="thumb-badge">${i+1}</span></div><div class="photo-meta"><div class="meta-title"><span>${esc(d.point||('NO.'+(i+1)))}</span><span>${d.status==='abnormal'?'⚠':''}</span></div><div class="meta-sub">${esc(d.type||'未分類')} · ${d.hasGps?fmtDateTime(d.time):'📍 待定位'}</div>${d.gpsNeedsReview?'<div class="meta-sub" style="color:#9a6700">⚠ GPS 需確認</div>':''}<div class="meta-sub">🧭 ${esc(headingText(d))} · ${esc(confidenceMeta(d).text)}</div><div class="meta-sub">${esc(d.condition||d.note||d.name||'')}</div><div class="meta-tags">${!d.hasGps?'<span class="tag warn">待定位</span>':''}${d.include===false?'<span class="tag">不入報告</span>':''}${(d.tags||[]).slice(0,3).map(t=>`<span class="tag ${d.status==='abnormal'?'danger':''}">${esc(t)}</span>`).join('')}</div><div class="photo-card-actions"><button class="mini-delete" style="border-color:#bfdbfe;color:#0758a8" type="button" onclick="event.stopPropagation();openQuickClassify(${i},false)">⚡ 快分</button><button class="mini-delete" type="button" onclick="event.stopPropagation();deletePhoto(${i})">🗑 刪除</button></div></div>`;list.appendChild(card)});if(!shown)list.innerHTML='<div class="empty">沒有符合條件的照片</div>'}
 function updateStatus(){document.getElementById('project-label').textContent=project.name||'未命名案件';document.getElementById('count-label').textContent=`${photosData.length} 張照片`;const p=photosData.filter(x=>!x.hasGps).length;document.getElementById('pending-label').textContent=`待定位 ${p}`;refreshTypeFilter()}
 function refreshTypeFilter(){const sel=document.getElementById('type-filter');const old=sel.value;const used=[...new Set([...TYPES,...photosData.map(x=>x.type).filter(Boolean)])];sel.innerHTML='<option value="">全部類型</option>'+used.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('');if(used.includes(old))sel.value=old}
 function setQuickFilter(v,el){quickFilter=v;document.querySelectorAll('.filter-chip').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderPhotoList()}
@@ -744,7 +878,7 @@ function closeModal(id){document.getElementById(id).style.display='none'}
 function updateHeadingPanel(){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];const h=normHeading(d.heading),eh=normHeading(d.exifHeading);const inp=document.getElementById('e-heading');inp.value=h===null?'':h.toFixed(1);document.getElementById('heading-cardinal').textContent=h===null?'未知':headingCardinal(h);const cm=confidenceMeta(d),ce=document.getElementById('heading-confidence');ce.className=`heading-confidence ${cm.cls}`;ce.textContent=cm.text;const ref=d.headingRef?`${d.headingRef}${d.headingRef==='T'?'（真北）':d.headingRef==='M'?'（磁北）':''}`:'未記錄';const rule=getHeadingRule(d);document.getElementById('heading-debug').innerHTML=`原始 EXIF：<b>${eh===null?'未記錄':eh.toFixed(1)+'°'}</b>｜Ref：<b>${esc(ref)}</b>｜Orientation：<b>${esc(d.exifOrientation??'未記錄')}</b><br>目前顯示：<b>${h===null?'未知':h.toFixed(1)+'° '+headingCardinal(h)}</b>｜模式：<b>${esc(d.headingMode||'auto')}</b>｜來源：<b>${esc(d.headingSource||'none')}</b>`;document.getElementById('heading-device-rule').innerHTML=`裝置：<b>${esc(deviceLabel(d))}</b>${d.deviceSoftware?`｜相機軟體：${esc(d.deviceSoftware)}`:''}<br>此 Orientation 的裝置規則：<b>${rule?fmtOffset(rule.offset)+'（已學習）':'尚未建立；目前保留原始 EXIF'}</b><br><span class="heading-unknown">系統不會只因 iPhone / Samsung / Android 或 Orientation 就硬套 ±90°；只有已學習的「型號＋Orientation」規則才會自動校正。</span>`}
 function showEditorTab(name){document.querySelectorAll('.editor-tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===name));const mapping={record:'editor-record-panel',location:'editor-location-panel',photo:'editor-photo-panel'};document.querySelectorAll('#photo-modal .editor-tab-panel').forEach(el=>el.classList.toggle('active',el.id===mapping[name]));const panel=document.querySelector('#photo-modal .modal-body');if(panel)panel.scrollTop=0}
 function savePhotoAndNext(){if(currentPhotoIndex===null)return;const next=currentPhotoIndex+1;savePhotoEditor(false);if(next>=photosData.length){closePhotoEditor();return}openPhotoEditor(next)}
-function openPhotoEditor(i){currentPhotoIndex=i;const d=photosData[i];document.getElementById('photo-editor-title').textContent=`照片 ${i+1}｜${d.name||''}`;document.getElementById('editor-img').src=d.url;document.getElementById('editor-img').style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('e-point').value=d.point||'';document.getElementById('e-area').value=d.area||'';document.getElementById('e-status').value=d.status||'normal';document.getElementById('e-condition').value=d.condition||'';document.getElementById('e-action').value=d.action||'';document.getElementById('e-note').value=d.note||'';document.getElementById('e-include').checked=d.include!==false;document.getElementById('e-album-confirmed').checked=!!d.albumConfirmedAt;updateAlbumStatusText(d);const ts=document.getElementById('e-type');ts.innerHTML=TYPES.map(t=>`<option>${t}</option>`).join('');ts.value=d.type||'未分類';renderTagPicker(d.tags||[]);updateHeadingPanel();updateVoiceAudioUI();updateOriginalEditorStatus().catch(console.error);document.getElementById('editor-coord').textContent=d.hasGps?`GPS：${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}${d.captureAccuracy?`（±${Math.round(d.captureAccuracy)}m）`:''}｜拍攝：${fmtDateTime(d.time)}${d.captureMethod?`｜${d.captureMethod}`:''}`:`⚠ 此照片沒有 GPS，請使用「指定位置」後點擊地圖。`;const quickImg=document.getElementById('editor-quick-thumbnail');quickImg.src=d.url;quickImg.style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('editor-quick-title').textContent=`${d.point||'照片 '+(i+1)}｜${d.type||'未分類'}`;document.getElementById('editor-quick-meta').textContent=`${fmtDateTime(d.time)}｜${d.hasGps?'📍 已定位':'⚠ 待定位'}｜方位 ${headingText(d)}`;const nextButton=document.getElementById('save-next-btn');nextButton.disabled=i>=photosData.length-1;showEditorTab('record');document.getElementById('editor-advanced').open=!window.matchMedia('(max-width:760px), (orientation:landscape) and (max-height:600px) and (pointer:coarse)').matches;document.getElementById('photo-modal').style.display='flex';document.querySelector('#photo-modal .modal-body').scrollTop=0}
+function openPhotoEditor(i){currentPhotoIndex=i;const d=photosData[i];document.getElementById('photo-editor-title').textContent=`照片 ${i+1}｜${d.name||''}`;document.getElementById('editor-img').src=d.url;document.getElementById('editor-img').style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('e-point').value=d.point||'';document.getElementById('e-area').value=d.area||'';document.getElementById('e-status').value=d.status||'normal';document.getElementById('e-condition').value=d.condition||'';document.getElementById('e-action').value=d.action||'';document.getElementById('e-note').value=d.note||'';document.getElementById('e-include').checked=d.include!==false;document.getElementById('e-album-confirmed').checked=!!d.albumConfirmedAt;updateAlbumStatusText(d);const ts=document.getElementById('e-type');ts.innerHTML=TYPES.map(t=>`<option>${t}</option>`).join('');ts.value=d.type||'未分類';renderTagPicker(d.tags||[]);updateHeadingPanel();updateVoiceAudioUI();updateOriginalEditorStatus().catch(console.error);document.getElementById('editor-coord').textContent=d.hasGps?`GPS：${d.lat.toFixed(6)}, ${d.lng.toFixed(6)}${d.captureAccuracy?`（±${Math.round(d.captureAccuracy)}m）`:''}｜拍攝：${fmtDateTime(d.time)}${d.captureMethod?`｜${d.captureMethod}`:''}`:`⚠ 此照片沒有 GPS，請使用「指定位置」後點擊地圖。`;document.getElementById('editor-gps-quality').textContent=formatGpsQuality(d);document.getElementById('editor-gps-quality').className=d.gpsNeedsReview||!d.hasGps?'gps-quality-warning':'gps-quality-good';const quickImg=document.getElementById('editor-quick-thumbnail');quickImg.src=d.url;quickImg.style.transform=`rotate(${d.rotation||0}deg)`;document.getElementById('editor-quick-title').textContent=`${d.point||'照片 '+(i+1)}｜${d.type||'未分類'}`;document.getElementById('editor-quick-meta').textContent=`${fmtDateTime(d.time)}｜${d.hasGps?'📍 已定位':'⚠ 待定位'}｜方位 ${headingText(d)}`;const nextButton=document.getElementById('save-next-btn');nextButton.disabled=i>=photosData.length-1;showEditorTab('record');document.getElementById('editor-advanced').open=!window.matchMedia('(max-width:760px), (orientation:landscape) and (max-height:600px) and (pointer:coarse)').matches;document.getElementById('photo-modal').style.display='flex';document.querySelector('#photo-modal .modal-body').scrollTop=0}
 function refreshHeadingEditor(markManual=false){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];const inp=document.getElementById('e-heading');const h=inp.value===''?null:normHeading(inp.value);d.heading=h;if(markManual){d.headingMode='manual';d.headingSource='人工修正';d.headingConfidence='manual'}updateHeadingPanel();scheduleSave();render()}
 function adjustHeading(delta){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex],base=normHeading(d.heading)??normHeading(d.exifHeading)??0;d.heading=normHeading(base+delta);d.headingMode='manual';d.headingSource='人工修正';d.headingConfidence='manual';updateHeadingPanel();scheduleSave();render()}
 function resetHeadingToExif(){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];d.heading=normHeading(d.exifHeading);d.headingMode='raw';d.headingSource=d.heading===null?'無 EXIF 方位':'原始 EXIF';d.headingConfidence=d.heading===null?'low':'medium';updateHeadingPanel();scheduleSave();render()}
@@ -755,6 +889,96 @@ function clearHeadingRule(){if(currentPhotoIndex===null)return;const d=photosDat
 function renderTagPicker(selected){const box=document.getElementById('tag-picker');box.innerHTML='';QUICK_TAGS.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='tag-pick'+(selected.includes(t)?' active':'');b.textContent=t;b.onclick=()=>b.classList.toggle('active');box.appendChild(b)})}
 function savePhotoEditor(close=true){if(currentPhotoIndex===null)return;const d=photosData[currentPhotoIndex];d.point=document.getElementById('e-point').value.trim();d.type=document.getElementById('e-type').value;d.area=document.getElementById('e-area').value.trim();d.status=document.getElementById('e-status').value;d.condition=document.getElementById('e-condition').value.trim();d.action=document.getElementById('e-action').value.trim();d.note=document.getElementById('e-note').value.trim();d.include=document.getElementById('e-include').checked;const hv=document.getElementById('e-heading').value;const parsedHeading=hv===''?null:normHeading(hv);if(parsedHeading!==normHeading(d.heading)){d.headingMode='manual';d.headingSource='人工修正';d.headingConfidence='manual'}d.heading=parsedHeading;d.tags=[...document.querySelectorAll('#tag-picker .tag-pick.active')].map(x=>x.textContent);scheduleSave();render();if(close)closePhotoEditor()}
 function closePhotoEditor(){stopVoiceNote();stopAudioRecord();document.getElementById('photo-modal').style.display='none'}
+// ===== v4.4.4 照片縮放檢視器 =====
+let photoZoomState={scale:1,x:0,y:0,rotation:0,index:null,objectUrl:null};
+const photoZoomLimits={min:1,max:8};
+function drawPhotoZoom(){
+  const st=photoZoomState,img=document.getElementById('photo-zoom-img');
+  img.style.transform=`translate3d(${st.x}px,${st.y}px,0) scale(${st.scale}) rotate(${st.rotation}deg)`;
+  document.getElementById('photo-zoom-level').textContent=Math.round(st.scale*100)+'%';
+}
+function clampPhotoZoomOffset(){
+  const stage=document.getElementById('photo-zoom-stage');
+  const limX=Math.max(0,(stage.clientWidth*(photoZoomState.scale-1))/2);
+  const limY=Math.max(0,(stage.clientHeight*(photoZoomState.scale-1))/2);
+  photoZoomState.x=Math.max(-limX,Math.min(limX,photoZoomState.x));
+  photoZoomState.y=Math.max(-limY,Math.min(limY,photoZoomState.y));
+}
+function setPhotoZoomScale(scale){
+  photoZoomState.scale=Math.max(photoZoomLimits.min,Math.min(photoZoomLimits.max,scale));
+  if(photoZoomState.scale<=1){photoZoomState.x=0;photoZoomState.y=0;}
+  clampPhotoZoomOffset();drawPhotoZoom();
+}
+function zoomPhotoBy(delta){setPhotoZoomScale(photoZoomState.scale*(delta>0?1.7:1/1.7))}
+function resetPhotoZoom(){photoZoomState.x=0;photoZoomState.y=0;setPhotoZoomScale(1)}
+async function openPhotoZoom(){
+  if(currentPhotoIndex===null)return;
+  const d=photosData[currentPhotoIndex],st=photoZoomState;
+  if(st.objectUrl){URL.revokeObjectURL(st.objectUrl);st.objectUrl=null}
+  st.index=currentPhotoIndex;st.scale=1;st.x=0;st.y=0;st.rotation=d.rotation||0;
+  const view=document.getElementById('photo-zoom-modal'),img=document.getElementById('photo-zoom-img');
+  document.getElementById('photo-zoom-title').textContent=`照片 ${currentPhotoIndex+1}｜${d.point||d.name||'現勘照片'}`;
+  img.onload=null;img.onerror=null;img.src=d.url;
+  view.classList.add('open');view.setAttribute('aria-hidden','false');drawPhotoZoom();
+  // 原始 HEIC/PNG/JPEG 有機會不被瀏覽器解碼；失敗則維持報告用 JPEG。
+  if(d.originalStored){try{
+    const source=await originalGet(d.id);
+    if(!source?.blob||!view.classList.contains('open')||st.index!==currentPhotoIndex)return;
+    const url=URL.createObjectURL(source.blob);st.objectUrl=url;
+    img.onerror=()=>{img.onerror=null;img.src=d.url};
+    img.src=url;
+    document.getElementById('photo-zoom-help').textContent='優先顯示原始／來源影像；雙指縮放、雙擊放大、拖曳查看';
+  }catch(e){console.warn('無法載入來源影像，改用 JPEG',e)}}
+}
+function closePhotoZoom(){
+  const view=document.getElementById('photo-zoom-modal');view.classList.remove('open');view.setAttribute('aria-hidden','true');
+  const st=photoZoomState;
+  if(st.objectUrl){URL.revokeObjectURL(st.objectUrl);st.objectUrl=null}
+  const img=document.getElementById('photo-zoom-img');img.removeAttribute('src');img.onerror=null;
+  st.index=null;st.scale=1;st.x=0;st.y=0;
+}
+function setupPhotoZoomGestures(){
+  const stage=document.getElementById('photo-zoom-stage');
+  let touchAnchor=null,lastTap=0,mouseAnchor=null,hadPinch=false;
+  function dist(a,b){return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)}
+  stage.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){hadPinch=true;touchAnchor={mode:'pinch',dist:dist(e.touches[0],e.touches[1]),scale:photoZoomState.scale,x:photoZoomState.x,y:photoZoomState.y,midX:(e.touches[0].clientX+e.touches[1].clientX)/2,midY:(e.touches[0].clientY+e.touches[1].clientY)/2};}
+    else if(e.touches.length===1){hadPinch=false;touchAnchor={mode:'pan',x:e.touches[0].clientX,y:e.touches[0].clientY,startX:photoZoomState.x,startY:photoZoomState.y,moved:false};}
+    if(e.cancelable)e.preventDefault();
+  },{passive:false});
+  stage.addEventListener('touchmove',e=>{
+    if(e.touches.length===2){
+      if(!touchAnchor||touchAnchor.mode!=='pinch'){hadPinch=true;touchAnchor={mode:'pinch',dist:dist(e.touches[0],e.touches[1]),scale:photoZoomState.scale,x:photoZoomState.x,y:photoZoomState.y,midX:(e.touches[0].clientX+e.touches[1].clientX)/2,midY:(e.touches[0].clientY+e.touches[1].clientY)/2};}
+      const ratio=dist(e.touches[0],e.touches[1])/Math.max(1,touchAnchor.dist);
+      photoZoomState.scale=Math.max(1,Math.min(8,touchAnchor.scale*ratio));
+      const mx=(e.touches[0].clientX+e.touches[1].clientX)/2,my=(e.touches[0].clientY+e.touches[1].clientY)/2;
+      photoZoomState.x=touchAnchor.x+(mx-touchAnchor.midX);photoZoomState.y=touchAnchor.y+(my-touchAnchor.midY);
+      clampPhotoZoomOffset();drawPhotoZoom();
+    }else if(e.touches.length===1&&touchAnchor?.mode==='pan'&&photoZoomState.scale>1){
+      if(Math.hypot(e.touches[0].clientX-touchAnchor.x,e.touches[0].clientY-touchAnchor.y)>8)touchAnchor.moved=true;
+      photoZoomState.x=touchAnchor.startX+(e.touches[0].clientX-touchAnchor.x);
+      photoZoomState.y=touchAnchor.startY+(e.touches[0].clientY-touchAnchor.y);
+      clampPhotoZoomOffset();drawPhotoZoom();
+    }
+    if(e.cancelable)e.preventDefault();
+  },{passive:false});
+  stage.addEventListener('touchend',e=>{
+    if(e.touches.length===0){
+      const now=Date.now();
+      if(!hadPinch&&touchAnchor?.mode==='pan'&&!touchAnchor.moved){
+        if(now-lastTap<320){setPhotoZoomScale(photoZoomState.scale>1?1:2.5);lastTap=0;}else lastTap=now;
+      }else lastTap=0;
+      hadPinch=false;touchAnchor=null;
+    }else if(e.touches.length===1){touchAnchor={mode:'pan',x:e.touches[0].clientX,y:e.touches[0].clientY,startX:photoZoomState.x,startY:photoZoomState.y};}
+  },{passive:true});
+  stage.addEventListener('wheel',e=>{e.preventDefault();setPhotoZoomScale(photoZoomState.scale*(e.deltaY<0?1.17:1/1.17))},{passive:false});
+  stage.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;mouseAnchor={x:e.clientX,y:e.clientY,sx:photoZoomState.x,sy:photoZoomState.y};stage.setPointerCapture?.(e.pointerId)});
+  stage.addEventListener('pointermove',e=>{if(!mouseAnchor||photoZoomState.scale<=1||e.pointerType!=='mouse')return;photoZoomState.x=mouseAnchor.sx+e.clientX-mouseAnchor.x;photoZoomState.y=mouseAnchor.sy+e.clientY-mouseAnchor.y;clampPhotoZoomOffset();drawPhotoZoom()});
+  stage.addEventListener('pointerup',()=>mouseAnchor=null);
+  stage.addEventListener('pointercancel',()=>mouseAnchor=null);
+  stage.addEventListener('dblclick',e=>{if(!window.matchMedia('(pointer:fine)').matches)return;setPhotoZoomScale(photoZoomState.scale>1?1:2.5)});
+  document.addEventListener('keydown',e=>{if(document.getElementById('photo-zoom-modal').classList.contains('open')){if(e.key==='Escape')closePhotoZoom();if(e.key==='+'||e.key==='=')zoomPhotoBy(1);if(e.key==='-')zoomPhotoBy(-1)}});
+}
 function rotatePhoto(deg){const d=photosData[currentPhotoIndex];d.rotation=((d.rotation||0)+deg+360)%360;document.getElementById('editor-img').style.transform=`rotate(${d.rotation}deg)`;scheduleSave();renderPhotoList()}
 function movePhoto(dir){if(currentPhotoIndex===null)return;savePhotoEditor(false);const ni=currentPhotoIndex+dir;if(ni<0||ni>=photosData.length)return;[photosData[currentPhotoIndex],photosData[ni]]=[photosData[ni],photosData[currentPhotoIndex]];currentPhotoIndex=ni;scheduleSave();render();openPhotoEditor(ni)}
 function deletePhoto(index){if(index<0||index>=photosData.length)return;const label=photosData[index]?.point||('NO.'+(index+1));if(!confirm(`確定刪除 ${label}？此動作無法復原。`))return;const removed=photosData[index];photosData.splice(index,1);if(removed?.originalStored)originalDelete(removed.id).catch(console.error);if(currentPhotoIndex===index){currentPhotoIndex=null;closePhotoEditor()}else if(currentPhotoIndex!==null&&currentPhotoIndex>index){currentPhotoIndex--}scheduleSave();render()}
@@ -1025,7 +1249,7 @@ function exportProject(){const payload={app:'專業現勘調查報告系統',ver
 async function resetProject(){if(!confirm('確定清除目前案件與所有照片？建議先匯出專案備份。'))return;photosData=[];drawnFeatures=[];offlineRegions=[];timelinePathLayer.clearLayers();backupInfo={zipExportRequestedAt:null};lastCapturedPhotoId=null;project={name:'',no:'',client:'',location:'',inspectors:'',weather:'',purpose:'',checklist:DEFAULT_CHECKLIST.map(x=>({text:x,done:false}))};drawnLayerGroup.clearLayers();await dbClear();await originalClear();fillProjectForm();render();closeModal('project-modal');alert('已清除本機專案')}
 
 async function waitForVisibleMapTiles(timeout=3500){const start=Date.now();while(Date.now()-start<timeout){await new Promise(r=>setTimeout(r,120));const imgs=[...document.querySelectorAll('#map .leaflet-tile-pane img.leaflet-tile')].filter(img=>{const st=getComputedStyle(img);return st.display!=='none'&&st.visibility!=='hidden'&&Number(st.opacity||1)>0});if(imgs.length&&imgs.every(img=>img.complete&&img.naturalWidth>0))return true}return false}
-// v4.4.3: PDF 與預覽共用資料，報告專用地圖不再使用互動地圖的 Cluster。
+// v4.4.4: PDF 與預覽共用資料，報告專用地圖不再使用互動地圖的 Cluster。
 let reportState=null;
 function reportType(d){return !d.type||d.type==='未分類'?'':String(d.type)}
 function reportAbnormal(d){return d.status==='abnormal'?'異常':''}
@@ -1180,7 +1404,7 @@ window.addEventListener('beforeunload',()=>{if(saveTimer)clearTimeout(saveTimer)
 
 updateNetworkStatus();
 
-// ===== v4.4.3：完整字型 PDF 文字排版（可複製／搜尋），A4 不拆圖／不切卡片 =====
+// ===== v4.4.4：完整字型 PDF 文字排版（可複製／搜尋），A4 不拆圖／不切卡片 =====
 let readyPdfBlob=null,readyPdfName='';
 function resetReadyPdf(){if(document.getElementById('pdf-proof-modal')?.style.display==='flex')closePdfProof();readyPdfBlob=null;readyPdfName='';document.getElementById('report-preview-pdf')?.classList.add('hidden');document.getElementById('report-download-pdf')?.classList.add('hidden');document.getElementById('report-share-pdf')?.classList.add('hidden');const m=document.getElementById('report-pdf-message');if(m){m.className='report-pdf-message no-print';m.textContent='PDF 以完整繁體中文字型及固定 A4 頁面輸出。第一次使用請連網；生成後先看「PDF 成品預覽」，再儲存或分享。'}}
 function pdfMsg(text,isError=false){const el=document.getElementById('report-pdf-message');if(!el)return;el.className='report-pdf-message no-print'+(isError?' error':'');el.textContent=text}
@@ -1219,7 +1443,7 @@ function pdfWriter(pdf,font){
  }
  function line(page,x1,y1,x2,y2,color=gray,width=.65){page.drawLine({start:{x:x1,y:y1},end:{x:x2,y:y2},color,thickness:width})}
  function commonHeader(page,title){txt(page,title,34,801,18,blue);line(page,34,789,561,789,blue,2.1)}
- function footer(page,n,total){line(page,34,34,561,34);txt(page,'Field Survey App v4.4.3',35,20,7.8,muted);txt(page,`${n} / ${total}`,528,20,8,muted)}
+ function footer(page,n,total){line(page,34,34,561,34);txt(page,'Field Survey App v4.4.4',35,20,7.8,muted);txt(page,`${n} / ${total}`,528,20,8,muted)}
  return {txt,lines,line,commonHeader,footer,safe,palette:{dark,muted,blue,red,gray,light},get replaced(){return replaced}};
 }
 async function pdfImage(doc,src,rotation=0){
@@ -1418,6 +1642,8 @@ function closePdfProof(){proofToken++;if(proofTask)try{proofTask.cancel()}catch(
 function downloadReadyPdf(){if(!readyPdfBlob)return alert('請先產生 PDF');const url=URL.createObjectURL(readyPdfBlob);const a=document.createElement('a');a.href=url;a.download=readyPdfName;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
 async function shareReadyPdf(){if(!readyPdfBlob)return alert('請先產生 PDF');try{const f=new File([readyPdfBlob],readyPdfName,{type:'application/pdf'});if(navigator.canShare?.({files:[f]})&&navigator.share){await navigator.share({files:[f],title:readyPdfName});return}downloadReadyPdf();pdfMsg('此瀏覽器不支援分享 PDF，已嘗試下載檔案。')}catch(e){if(e.name!=='AbortError'){console.warn(e);pdfMsg('PDF 分享未完成，請改按「儲存 PDF」。',true)}}}
 
+restoreFieldUiSize();
+setupPhotoZoomGestures();
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Service Worker 註冊失敗',e));
 </script>
 </body>
